@@ -2,7 +2,7 @@
 
 /* Hero Section */
 .about-hero {
-  padding-top: var(--space-32) !important;
+  padding-top: var(--space-48) !important;
 }
 
 .about-hero-inner {
@@ -22,15 +22,19 @@
   font-size: var(--text-3xl);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
+  line-height: 1.08;
   margin-block: var(--space-5) var(--space-8);
 }
 
 .about-lead {
-  font-size: var(--text-md);
+  max-width: 540px;
+}
+
+.about-lead p {
+  font-size: var(--text-base);
   color: var(--color-label-secondary);
   line-height: var(--leading-snug);
-  max-width: 540px;
+  margin: 0;
 }
 
 .about-photo-frame {
