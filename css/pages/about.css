@@ -1,6 +1,10 @@
 /* About Page Styles */
 
 /* Hero Section */
+.about-hero {
+  padding-top: var(--space-32);
+}
+
 .about-hero-inner {
   display: grid;
   grid-template-columns: 1fr;
