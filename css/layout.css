@@ -32,6 +32,31 @@
   padding-block: var(--space-32);
 }
 
+/* Section Header Pattern */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-separator);
+  padding-bottom: var(--space-6);
+}
+
+.section-title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+}
+
+.section-link {
+  color: var(--color-label-tertiary);
+  transition: color var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+}
+
+.section-link:hover {
+  color: var(--color-label-primary);
+}
+
 /* Grid Systems */
 .grid-work {
   display: grid;
