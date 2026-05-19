@@ -1,0 +1,298 @@
+/* Home Page Styles */
+
+/* Hero Section */
+.hero {
+  padding-top: var(--space-32);
+  padding-bottom: 0;
+}
+
+.hero-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-fill-secondary);
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-label-secondary);
+}
+
+
+.badge-yellow {
+  background: #FFD600;
+  color: #111;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-weight: var(--weight-medium);
+}
+
+.hero-headline {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-5);
+  font-weight: var(--weight-regular);
+  color: var(--color-label-secondary);
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .hero-headline {
+    font-size: clamp(40px, 6vw, 72px);
+  }
+}
+
+.hero-strong {
+  font-weight: var(--weight-semibold);
+  color: var(--color-label-primary);
+}
+
+.hero-sub {
+  font-size: clamp(15px, 2.5vw, 18px);
+  font-weight: var(--weight-regular);
+  color: var(--color-label-secondary);
+  max-width: 750px;
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+  margin-inline: auto;
+}
+
+#hero-text {
+  /* cursor: crosshair;  Removed to allow custom cursor inheritance */
+}
+
+.hero-name-highlight {
+  color: var(--color-label-primary);
+  font-weight: var(--weight-semibold);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+/* Animated underline indicating interactivity */
+.hero-name-highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-label-primary);
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color var(--duration-base) var(--ease-out),
+              height var(--duration-base) var(--ease-out);
+  border-radius: var(--radius-full);
+}
+
+/* State when hovering the hero text body */
+.hero.portrait-visible .hero-name-highlight {
+  /* Keep text dark since yellow on white is hard to read */
+  color: var(--color-label-primary);
+}
+
+.hero.portrait-visible .hero-name-highlight::after {
+  transform: scaleX(1);
+  background-color: #FFD600;
+  height: 4px; /* Make the yellow pop a bit more */
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-20);
+}
+
+/* =========================================
+   HERO MEDIA — Scrolling mockups + portrait
+   ========================================= */
+
+/* Outer wrapper — full viewport width, sets the height */
+.hero-media {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 500px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+/* This is the element that actually animates.
+   It contains TWO identical .scrolling-track divs side by side.
+   translateX(-50%) shifts it by exactly one track's width → seamless loop. */
+.hero-media-background {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: flex;
+  width: max-content;
+  animation: scroll-horizontal 40s linear infinite;
+  will-change: transform;
+}
+
+
+
+/* Each track is just a static flex row of cards */
+.scrolling-track {
+  display: flex;
+  gap: 24px;
+  padding-right: 24px;
+  /* gap between the two tracks */
+  flex-shrink: 0;
+}
+
+/* Individual mockup card */
+.mockup-item {
+  height: 320px;
+  width: max-content;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  will-change: transform;
+  background: white;
+}
+
+.mockup-item:hover {
+  transform: translateY(-12px);
+}
+
+.mockup-img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mockup-item:hover .mockup-img {
+  transform: scale(1.03);
+}
+
+/* Designer portrait — floats on top, absolutely centered */
+.hero-media-foreground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  height: 440px;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 8px solid #1A1A1A;
+  background: #1A1A1A;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.2);
+
+  /* Hidden state — scaled down, rotated, offset */
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -44%) scale(0.72) rotate(-5deg);
+  filter: blur(6px);
+
+  /* Exit: snappy collapse */
+  transition:
+    opacity      0.22s ease-in,
+    transform    0.22s cubic-bezier(0.4, 0, 1, 1),
+    filter       0.22s ease-in;
+
+  will-change: opacity, transform, filter;
+}
+
+/* Reveal portrait — spring pop-in */
+.hero.portrait-visible .hero-media-foreground {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  filter: blur(0px);
+
+  /* Spring entrance: fast start, elastic overshoot, settle */
+  transition:
+    opacity      0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform    0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter       0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.designer-img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Pure CSS infinite scroll — translateX(-50%) = exactly one track width */
+@keyframes scroll-horizontal {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  to {
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+/* Section Header Pattern */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-separator);
+  padding-bottom: var(--space-6);
+}
+
+.section-title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+}
+
+.section-link {
+  color: var(--color-label-tertiary);
+  transition: color var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+}
+
+.section-link:hover {
+  color: var(--color-label-primary);
+}
+
+/* About Strip */
+.about-strip {
+  border-top: 1px solid var(--color-separator);
+  border-bottom: 1px solid var(--color-separator);
+  background: var(--color-fill-secondary);
+}
+
+.about-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.about-strip-text {
+  font-size: var(--text-md);
+  color: var(--color-label-secondary);
+  max-width: 560px;
+  font-style: italic;
+  line-height: var(--leading-snug);
+}

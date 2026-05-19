@@ -1,0 +1,80 @@
+:root {
+  /* Colour — Label */
+  --color-label-primary:    #1D1D1F;
+  --color-label-secondary:  #424245;
+  --color-label-tertiary:   #6E6E73;
+  --color-label-quaternary: #AEAEB2;
+ 
+  /* Colour — Fill */
+  --color-fill-primary:   #FFFFFF;
+  --color-fill-secondary: #F5F5F7;
+  --color-fill-tertiary:  #E8E8ED;
+  --color-separator:      #D2D2D7;
+ 
+  /* Colour — Accent & Semantic */
+  --color-accent:         #0066CC;
+  --color-accent-hover:   #004499;
+  --color-accent-subtle:  #E8F0FB;
+  --color-success:        #1D9655;
+  --color-warning:        #FF6B00;
+ 
+  /* Typography — Families */
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont,
+               'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+ 
+  /* Typography — Size Scale (fluid) */
+  --text-xs:   clamp(11px, 1.2vw, 12px);
+  --text-sm:   clamp(13px, 1.4vw, 14px);
+  --text-base: clamp(15px, 1.6vw, 17px);
+  --text-md:   clamp(17px, 1.8vw, 19px);
+  --text-lg:   clamp(19px, 2.2vw, 22px);
+  --text-xl:   clamp(24px, 3vw, 30px);
+  --text-2xl:  clamp(30px, 4vw, 40px);
+  --text-3xl:  clamp(40px, 6vw, 64px);
+  --text-hero: clamp(52px, 8vw, 96px);
+ 
+  /* Typography — Leading & Tracking */
+  --leading-tight:  1.15;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --tracking-tight:  -0.03em;
+  --tracking-normal: -0.01em;
+  --tracking-wide:    0.05em;
+ 
+  /* Typography — Weight */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+ 
+  /* Spacing */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px;  --space-5: 20px;  --space-6: 24px;
+  --space-8: 32px;  --space-10: 40px; --space-12: 48px;
+  --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --space-32: 128px; --space-48: 192px;
+ 
+  /* Layout */
+  --container-max: 1200px;
+  --prose-max:     760px;
+  --nav-height:    64px;
+ 
+  /* Shape */
+  --radius-sm:   6px;  --radius-md: 12px;
+  --radius-lg:   18px; --radius-xl: 24px;
+  --radius-full: 9999px;
+ 
+  /* Elevation */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.08);
+ 
+  /* Motion */
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);
+  --ease-out:      cubic-bezier(0, 0, .2, 1);
+  --ease-in:       cubic-bezier(.4, 0, 1, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+}

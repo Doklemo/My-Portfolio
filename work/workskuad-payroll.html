@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workskuad Payroll — Case Study</title>
+  <meta name="description" content="How I designed a streamlined automated payroll and compliance platform for African SMBs with multi-currency support.">
+  <meta property="og:title" content="Workskuad Payroll — Case Study by Ayodeji Lemo">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages/case-study.css">
+  <!-- Custom Cursor -->
+  <link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-profile">
+        <img src="../img/designer_portrait.jpg" alt="Ayodeji Lemo" class="nav-avatar">
+        <span class="nav-name">Ayodeji Lemo</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-menu" aria-expanded="false" aria-label="Menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../playground.html">Playground</a></li>
+        <li><a href="../contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="cs-back" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="javascript:history.back()" class="cs-back-link">← Back</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="cs-header section">
+      <div class="container">
+        <div class="cs-header-grid">
+          
+          <!-- Left: Metadata -->
+          <div class="cs-meta">
+            <div class="cs-meta-item">
+              <span class="text-label">Company</span>
+              <span class="cs-meta-value">Workskuad</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Role</span>
+              <span class="cs-meta-value">Product Designer</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Year</span>
+              <span class="cs-meta-value">2024</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Platform</span>
+              <span class="cs-meta-value">Web App</span>
+            </div>
+          </div>
+
+          <!-- Right: Title + description -->
+          <div class="cs-header-content">
+            <div class="cs-tags">
+              <span class="tag">HR Tech</span>
+              <span class="tag">Fintech</span>
+            </div>
+            <h1 class="cs-title">Workskuad Payroll</h1>
+            <p class="cs-subtitle">Streamlining HR Operations for Modern Businesses.</p>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <div class="cs-cover">
+      <div class="container">
+        <div class="cs-cover-image">
+          <img src="../img/Workskuad Payroll/Cover image.png" alt="Workskuad Payroll platform screens">
+        </div>
+      </div>
+    </div>
+
+    <article class="cs-body">
+      <div class="container">
+
+        <div class="cs-row">
+          <span class="cs-row-label">The Challenge</span>
+          <div class="cs-row-content">
+            <p>Small and medium businesses face complex payroll management tasks, consuming valuable time with manual calculations, currency conversions, and limited transparency in salary information and financial services for employees.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">The Solution</span>
+          <div class="cs-row-content">
+            <p>A comprehensive payroll management system that streamlines operations through automated salary calculations, flexible payment options, and integrated employee financial services—all wrapped in an intuitive, user-friendly interface.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Problems Solved</span>
+          <div class="cs-row-content">
+            <ol>
+              <li><strong>Time-Consuming Manual Payroll Processing</strong>
+                <ul>
+                  <li>Businesses spend hours manually calculating salaries, deductions, and bonuses</li>
+                  <li>High risk of human error in calculations</li>
+                </ul>
+              </li>
+              <li><strong>Complex Multi-Currency &amp; Payment Management</strong>
+                <ul>
+                  <li>Difficulty handling payroll across different currencies and payment methods</li>
+                  <li>Limited flexibility in payment scheduling and processing</li>
+                </ul>
+              </li>
+              <li><strong>Poor Employee Financial Transparency</strong>
+                <ul>
+                  <li>Limited access to salary information and payment history</li>
+                  <li>No integrated financial services for advances or benefits</li>
+                </ul>
+              </li>
+              <li><strong>Inefficient Payroll Setup &amp; Management</strong>
+                <ul>
+                  <li>Complex setup process for new payroll cycles</li>
+                  <li>Challenges in tracking payroll status and payment details</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Process &amp; Solutions</span>
+          <div class="cs-row-content">
+            <p><strong>1. Intuitive Payroll Dashboard</strong><br>
+            <em>Problem:</em> Payroll managers needed a quick overview of key metrics and recent activities.<br>
+            <em>Solution:</em> Created a comprehensive dashboard with clear visual hierarchy and actionable insights.<br>
+            <em>Key Features:</em> At-a-Glance Metrics (current employee count, salary totals, key statistics), Recent Activity Tracking (latest payroll runs with details), Visual Payment Summary (bar charts showing salary trends), Quick Actions (easy access to create new payroll).<br>
+            <em>Design Decisions:</em> Used card-based layout for scannable information blocks, color-coded payment status (processed, pending, failed), and prominent CTAs.</p>
+
+            <!-- Dashboard Carousel -->
+            <div class="cs-carousel" id="dashboard-carousel" role="region" aria-label="Dashboard views">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employer Dashboard.png" alt="Employer Dashboard View">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee Dashboard.png" alt="Employee Dashboard View">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="Dashboard types">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true"  aria-label="Employer Dashboard" data-index="0"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Employee Dashboard" data-index="1"></button>
+              </div>
+            </div>
+            <!-- Dynamic caption: full width, outside carousel -->
+            <p class="cs-image-caption cs-image-caption--full" id="dashboard-caption">Employer Dashboard — At-a-glance metrics and recent payroll activity.</p>
+
+            <script>
+              (function () {
+                const captions = [
+                  'Employer Dashboard — At-a-glance metrics and recent payroll activity.',
+                  'Employee Dashboard — Salary transparency and integrated financial services.'
+                ];
+                const carousel = document.getElementById('dashboard-carousel');
+                const track    = carousel.querySelector('.cs-carousel-track');
+                const dots     = carousel.querySelectorAll('.cs-dot');
+                const caption  = document.getElementById('dashboard-caption');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  caption.textContent = captions[index];
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+            
+            <p><strong>2. Streamlined Payroll Setup Process</strong><br>
+            <em>Problem:</em> Setting up new payroll cycles was complex and error-prone.<br>
+            <em>Solution:</em> Designed a step-by-step payroll creation flow with clear validation and preview.<br>
+            <em>Key Innovations:</em> Flexible Configuration (support for multiple currencies, custom items), Employee Selection (bulk selection with individual customization), Real-time Calculations (instant preview of totals), Validation System (built-in error checking).<br>
+            <em>User Flow Highlights:</em> Guided setup with progress indicators, ability to save drafts, clear summary before final processing.</p>
+
+            <!-- Setup Carousel -->
+            <div class="cs-carousel" id="setup-carousel" role="region" aria-label="Setup flow screens">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 1.png" alt="Payroll Setup Step 1">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 2.png" alt="Payroll Setup Step 2">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 3.png" alt="Payroll Setup Step 3">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 4.png" alt="Payroll Setup Step 4">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 5.png" alt="Payroll Setup Step 5">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Payroll setup 6.png" alt="Payroll Setup Step 6">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="Setup steps">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true"  aria-label="Step 1" data-index="0"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Step 2" data-index="1"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Step 3" data-index="2"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Step 4" data-index="3"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Step 5" data-index="4"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Step 6" data-index="5"></button>
+              </div>
+            </div>
+            <script>
+              (function () {
+                const carousel = document.getElementById('setup-carousel');
+                const track    = carousel.querySelector('.cs-carousel-track');
+                const dots     = carousel.querySelectorAll('.cs-dot');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+
+            <p><strong>3. Comprehensive Payroll Management Interface</strong><br>
+            <em>Problem:</em> Tracking and managing ongoing payroll processes lacked visibility and control.<br>
+            <em>Solution:</em> Built a detailed payroll management system with multiple views and batch operations.<br>
+            <em>Features:</em> Tabular Overview (sortable, filterable employee list), Batch Operations (process multiple payments), Individual Employee Management (detailed view with salary history), Status Tracking (clear indicators).<br>
+            <em>Design Approach:</em> Clean table design with appropriate information density, consistent iconography, smart defaults with customization options.</p>
+
+            <!-- PM Carousel -->
+            <div class="cs-carousel" id="pm-carousel" role="region" aria-label="Payroll management screens">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM1.png" alt="Payroll Management Screen 1">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM2.png" alt="Payroll Management Screen 2">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM3.png" alt="Payroll Management Screen 3">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM4.png" alt="Payroll Management Screen 4">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM5.png" alt="Payroll Management Screen 5">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/PM6.png" alt="Payroll Management Screen 6">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="PM steps">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true"  aria-label="Screen 1" data-index="0"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 2" data-index="1"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 3" data-index="2"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 4" data-index="3"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 5" data-index="4"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 6" data-index="5"></button>
+              </div>
+            </div>
+
+            <script>
+              (function () {
+                const carousel = document.getElementById('pm-carousel');
+                const track    = carousel.querySelector('.cs-carousel-track');
+                const dots     = carousel.querySelectorAll('.cs-dot');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+
+            <p><strong>4. Employee Financial Services Integration</strong><br>
+            <em>Problem:</em> Employees needed access to salary information and financial services.<br>
+            <em>Solution:</em> Created an employee-facing dashboard with transparent salary information and integrated services.<br>
+            <em>Key Features:</em> Salary Transparency (clear breakdown of payments), Integrated Wallet (access to advances and withdrawals), Transaction History, Service Integration (insurance, data purchases, benefits).</p>
+
+            <!-- Employee Carousel -->
+            <div class="cs-carousel" id="employee-carousel" role="region" aria-label="Employee dashboard screens">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 1.png" alt="Employee Screen 1">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 2.png" alt="Employee Screen 2">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 3.png" alt="Employee Screen 3">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 4.png" alt="Employee Screen 4">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 5.png" alt="Employee Screen 5">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 6.png" alt="Employee Screen 6">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 7.png" alt="Employee Screen 7">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 8.png" alt="Employee Screen 8">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 9.png" alt="Employee Screen 9">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Employee/Employee 10.png" alt="Employee Screen 10">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="Employee steps">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true"  aria-label="Screen 1" data-index="0"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 2" data-index="1"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 3" data-index="2"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 4" data-index="3"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 5" data-index="4"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 6" data-index="5"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 7" data-index="6"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 8" data-index="7"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 9" data-index="8"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 10" data-index="9"></button>
+              </div>
+            </div>
+
+            <script>
+              (function () {
+                const carousel = document.getElementById('employee-carousel');
+                const track    = carousel.querySelector('.cs-carousel-track');
+                const dots     = carousel.querySelectorAll('.cs-dot');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Design System</span>
+          <div class="cs-row-content">
+            <p><strong>Information Architecture</strong><br>
+            Implemented role-based navigation for administrators and employees, logical grouping of payroll functions by related tasks, and progressive disclosure to show complex features only when needed.</p>
+            <p><strong>Visual Design Principles</strong><br>
+            Took a data-first approach with clear typographic hierarchy for financial information. Communicated status consistently using a robust color system. Used scannable layouts utilizing strategic whitespace and alignment.</p>
+            <p><strong>Component Design</strong><br>
+            Ensured consistent form patterns for unified data input. Designed smart tables with advanced filtering and sorting. Utilized modal workflows for focused task completion in context.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Results &amp; Impact</span>
+          <div class="cs-row-content">
+            <p><strong>Process Improvements:</strong> Automated calculations cut hours from each payroll cycle, real-time validation eliminated common errors, and multi-currency support provided flexibility for diverse needs.</p>
+            <p><strong>User Experience Gains:</strong> Streamlined workflows sped up administrator tasks, clear salary information with easy financial services access improved employee satisfaction, and visual feedback prevented common mistakes.</p>
+            <p><strong>Business Value:</strong> Operational cost savings through less manual work and fewer errors. System scales smoothly with business expansion. Automated records simplified audits and compliance.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Variable Pay Feature</span>
+          <div class="cs-row-content">
+            <p><em>A proactive problem-solving mini case study</em></p>
+            
+            <p><strong>The Problem I Spotted</strong><br>
+            While analyzing support tickets, I found that 60% of customer complaints were related to the complexity of processing bonuses and one-time payments. Users were creating separate payroll runs for single bonuses, resulting in inefficient processes taking 45+ minutes, a 23% error rate, and lost audit trails as users reverted to manual bank transfers.</p>
+            
+            <p><strong>My Proactive Solution</strong><br>
+            <em>"Designed without permission because users were struggling"</em><br>
+            I identified two distinct use cases that needed different pathways: Bulk Processing (CSV upload) and Individual Setup (quick search-and-add).</p>
+            
+            <p><strong>Design Features:</strong></p>
+            <ul>
+              <li><strong>Flexible Input Methods:</strong> Search/add employees individually, bulk CSV upload with progress tracking, and template downloads.</li>
+              <li><strong>Smart Defaults:</strong> Defaulted to "% of salary" for bonuses, fixed amount options available.</li>
+              <li><strong>Batch Operations:</strong> "Set for all" functionality and individual overrides.</li>
+              <li><strong>Clear Preview System:</strong> Real-time calculation display and employee-by-employee breakdown before processing.</li>
+            </ul>
+
+            <!-- VP Carousel -->
+            <div class="cs-carousel" id="vp-carousel" role="region" aria-label="Variable Pay screens">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 1.png" alt="Variable Pay Screen 1">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 2.png" alt="Variable Pay Screen 2">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 3.png" alt="Variable Pay Screen 3">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 4.png" alt="Variable Pay Screen 4">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 5.png" alt="Variable Pay Screen 5">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Workskuad Payroll/Variable pay/VP 6.png" alt="Variable Pay Screen 6">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="VP steps">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true"  aria-label="Screen 1" data-index="0"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 2" data-index="1"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 3" data-index="2"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 4" data-index="3"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 5" data-index="4"></button>
+                <button class="cs-dot"               role="tab" aria-selected="false" aria-label="Screen 6" data-index="5"></button>
+              </div>
+            </div>
+
+            <script>
+              (function () {
+                const carousel = document.getElementById('vp-carousel');
+                const track    = carousel.querySelector('.cs-carousel-track');
+                const dots     = carousel.querySelectorAll('.cs-dot');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+
+            <p><strong>Measured Impact:</strong><br>
+            Average time to process bonuses dropped from 45 minutes to 5 minutes. Support tickets related to bonus errors decreased by 85%. 92% of active employers used the new feature within the first month, and it ensured a 100% automated audit trail for compliance.</p>
+            
+            <p><strong>Why I Did This:</strong><br>
+            By proactively identifying and solving this pain point rather than waiting for requirements, I saved the operations team hundreds of hours in support time and improved the core value proposition of the payroll product.</p>
+            
+            <p><strong>Key Takeaways:</strong><br>
+            Proactive problem identification through data analytics successfully revealed distinct user needs. Applying user-centered and data-driven principles with smart defaults reduced cognitive load, while a clear preview system prevented errors.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Key Insights</span>
+          <div class="cs-row-content">
+            <ol>
+              <li><strong>Financial Data Requires Extra Clarity:</strong> Consistent formatting and clear labels ensure accuracy.</li>
+              <li><strong>Flexibility vs. Simplicity Balance:</strong> Powerful features behind an intuitive interface.</li>
+              <li><strong>Status Communication is Critical:</strong> Clear indicators reduce user uncertainty.</li>
+              <li><strong>Progressive Complexity:</strong> Basic features first, advanced options revealed gradually.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Technical Details</span>
+          <div class="cs-row-content">
+            <ul>
+              <li><strong>Real-time Calculations:</strong> Instant feedback on payroll changes</li>
+              <li><strong>Multi-currency Support:</strong> Seamless currency conversion and formatting</li>
+              <li><strong>Batch Processing:</strong> Efficient handling of large employee groups</li>
+              <li><strong>Data Security:</strong> Robust protection for sensitive financial data</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <section class="cs-next">
+      <div class="container">
+        <div class="cs-next-header">
+          <h2 class="cs-next-title">Up next</h2>
+          <a href="../work.html" class="cs-next-btn">All works ↗</a>
+        </div>
+        <div class="grid-work">
+          <!-- Card 1: Reliance HMO -->
+          <article class="card" data-domain="fintech">
+            <a href="reliance.html" class="card-link" aria-label="Reliance HMO case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Reliance/Header.png" alt="Reliance Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">Landing page</span>
+                  <span class="overlay-tag tag-light">Redesign</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Reliance HMO</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">Landing Page Redesign</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 2: Gladys AI -->
+          <article class="card" data-domain="health">
+            <a href="gladys.html" class="card-link" aria-label="Gladys AI case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Gladys/Cover image.png" alt="Gladys AI Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">AI</span>
+                  <span class="overlay-tag tag-light">Health Tech</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Gladys AI</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">AI-Powered Personalized Skincare</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+
+    <!-- Zone 1: CTA Headline + Description -->
+    <div class="footer-cta">
+      <div class="container">
+        <div class="footer-cta-inner">
+          <div class="footer-cta-left">
+            <h2 class="footer-cta-headline">Got a project<br>in mind?<br>Let's talk.</h2>
+          </div>
+          <div class="footer-cta-right">
+            <p class="footer-cta-body">I'm currently open to senior product design roles and select freelance
+              opportunities. I work closely with product and engineering teams to ship experiences that make a real
+              difference — and I'd love to hear about what you're building.</p>
+            <a href="../contact.html" class="footer-cta-link">Send me a message →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 2: Scattered Polaroid Cards -->
+    <div class="footer-gallery">
+      <div class="container">
+        <div class="footer-gallery-header">
+          <h3>It is not all about work</h3>
+          <svg class="curly-arrow" width="80" height="80" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20,20 C60,-10 90,40 50,50 C10,60 30,90 80,90" stroke="currentColor" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M65,75 L80,90 L65,100" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer-gallery-inner" aria-hidden="true">
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-8deg) translateY(40px);">
+          <img src="../img/jujutsu.jpg" alt="Jujutsu Kaisen" class="card-static">
+          <img src="../img/jjk.gif" alt="Jujutsu Kaisen animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--info" style="transform: rotate(5deg) translateY(10px);">
+          <p>Lagos, Nigeria</p>
+          <p>dejilemo@gmail.com</p>
+          <p>Open to work</p>
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-4deg) translateY(60px);">
+          <img src="../img/Demon-slayer.png" alt="Demon Slayer" class="card-static">
+          <img src="../img/Demon Slayer GIF.gif" alt="Demon Slayer animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(7deg) translateY(5px);">
+          <img src="../img/GOW.jpg" alt="God of War" class="card-static">
+          <img src="../img/GOW.gif" alt="God of War animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(3deg) translateY(50px);">
+          <img src="../img/TLOU.jpg" alt="The Last of Us" class="card-static">
+          <img src="../img/TLoUgif.gif" alt="The Last of Us animated" class="card-gif">
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 3: Brand Tagline + Nav Columns -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-body">
+
+          <!-- Left: Avatar + Tagline -->
+          <div class="footer-brand">
+
+            <p class="footer-tagline">
+              Design.<br>
+              Build.<br>
+              <span class="footer-tagline-muted">Ship.</span>
+            </p>
+          </div>
+
+          <!-- Right: Link columns -->
+          <div class="footer-nav">
+            <div class="footer-col">
+              <span class="footer-col-label">Navigate</span>
+              <ul role="list">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../playground.html">Playground</a></li>
+                <li><a href="../contact.html">Get in Touch</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Connect</span>
+              <ul role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://read.cv/ayodejilemo" target="_blank" rel="noopener">Read.cv</a></li>
+                <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Availability</span>
+              <ul role="list">
+                <li class="footer-status"><span class="status-dot"></span>Open to work</li>
+                <li>Senior roles</li>
+                <li>Freelance</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 4: Bottom copyright bar -->
+    <div class="footer-bar">
+      <div class="container">
+        <p class="footer-copy">&copy; 2025 Ayodeji Lemo</p>
+        <p class="footer-copy">Product Designer · Lagos, Nigeria</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

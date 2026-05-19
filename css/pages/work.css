@@ -1,0 +1,142 @@
+/* Work Page Styles */
+
+/* Page Hero */
+.page-hero {
+  padding-bottom: var(--space-12);
+}
+
+.page-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  margin-block: var(--space-4) var(--space-6);
+}
+
+.page-sub {
+  font-size: var(--text-md);
+  color: var(--color-label-secondary);
+  max-width: 560px;
+  line-height: var(--leading-snug);
+}
+
+/* Filter System */
+.filter-wrapper input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  border: none;
+  background: var(--color-fill-secondary);
+  color: var(--color-label-secondary);
+  transition: all var(--duration-fast) var(--ease-standard);
+  margin-right: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.filter-btn:hover {
+  background: var(--color-fill-tertiary);
+  color: var(--color-label-primary);
+}
+
+/* Checked state */
+input[type="radio"]:checked + .filter-btn {
+  background: var(--color-label-primary);
+  color: var(--color-fill-primary);
+}
+
+/* Filter bar visual separator */
+.filter-wrapper .grid-work {
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-separator);
+}
+
+/* CSS-only filtering via :checked sibling selectors */
+#filter-saas:checked ~ .grid-work .card:not([data-domain="saas"]) {
+  display: none;
+}
+
+#filter-fintech:checked ~ .grid-work .card:not([data-domain="fintech"]) {
+  display: none;
+}
+
+#filter-hr:checked ~ .grid-work .card:not([data-domain="hr"]) {
+  display: none;
+}
+
+#filter-b2c:checked ~ .grid-work .card:not([data-domain="b2c"]) {
+  display: none;
+}
+
+/* Card Link (full card clickable) */
+.card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.card-link--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Card Tags Row */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* NDA Locked Card */
+.card--locked {
+  position: relative;
+  cursor: not-allowed;
+}
+
+.card--locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.card-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius-xl);
+  z-index: 2;
+  color: var(--color-label-tertiary);
+  transition: background var(--duration-base) var(--ease-standard);
+}
+
+.card--locked:hover .card-lock-overlay {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.card-lock-text {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-label-tertiary);
+}

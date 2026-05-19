@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Ayodeji Lemo</title>
+  <meta name="description" content="Get in touch with Ayodeji Lemo. Open to senior product design roles and select freelance projects.">
+  <meta property="og:title" content="Contact — Ayodeji Lemo">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/contact.css">
+  <!-- Custom Cursor -->
+  <link rel="stylesheet" href="css/cursor.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-profile">
+        <img src="img/designer_portrait.jpg" alt="Ayodeji Lemo" class="nav-avatar">
+        <span class="nav-name">Ayodeji Lemo</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-menu" aria-expanded="false" aria-label="Menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="playground.html">Playground</a></li>
+        <li><a href="contact.html" aria-current="page">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main id="main">
+    <section class="section contact-hero">
+      <div class="container">
+        <div class="contact-hero-inner">
+          <div class="contact-intro">
+            <span class="text-label">Contact</span>
+            <h1 class="contact-title">Let's build something worth using.</h1>
+            <p class="contact-sub">Whether you're hiring for a senior design role or building something ambitious and need a design partner — I'd love to hear from you.</p>
+            <div class="contact-details">
+              <a href="mailto:dejilemo@gmail.com" class="contact-email">dejilemo@gmail.com</a>
+              <p class="contact-response">I respond within 48 hours.</p>
+              <div class="contact-status">
+                <span class="status-dot"></span>
+                <span class="status-text">Available for new projects</span>
+              </div>
+            </div>
+            <div class="contact-elsewhere">
+              <span class="text-label">Elsewhere</span>
+              <ul class="social-links" role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+                <li><a href="https://read.cv/ayodejilemo" target="_blank" rel="noopener">Read.cv ↗</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact-form-wrap">
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="type" class="form-label">What's this about?</label>
+                <select id="type" name="type" class="form-input" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option value="fulltime">Full-time role</option>
+                  <option value="freelance">Freelance project</option>
+                  <option value="collab">Collaboration</option>
+                  <option value="other">Something else</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell me about what you're working on…" required rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="submit-btn">Send message</button>
+            </form>
+            <div class="contact-success" id="contact-success" hidden>
+              <div class="success-icon" aria-hidden="true">✓</div>
+              <h2 class="success-title">Message sent.</h2>
+              <p class="success-sub">Thanks for reaching out. I'll be in touch within 48 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+
+    <!-- Zone 2: Scattered Polaroid Cards -->
+    <div class="footer-gallery">
+      <div class="container">
+        <div class="footer-gallery-header">
+          <h3>It is not all about work</h3>
+          <svg class="curly-arrow" width="80" height="80" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20,20 C60,-10 90,40 50,50 C10,60 30,90 80,90" stroke="currentColor" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M65,75 L80,90 L65,100" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer-gallery-inner" aria-hidden="true">
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-8deg) translateY(40px);">
+          <img src="img/jujutsu.jpg" alt="Jujutsu Kaisen" class="card-static">
+          <img src="img/jjk.gif" alt="Jujutsu Kaisen animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--info" style="transform: rotate(5deg) translateY(10px);">
+          <p>Lagos, Nigeria</p>
+          <p>dejilemo@gmail.com</p>
+          <p>Open to work</p>
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-4deg) translateY(60px);">
+          <img src="img/Demon-slayer.png" alt="Demon Slayer" class="card-static">
+          <img src="img/Demon Slayer GIF.gif" alt="Demon Slayer animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(7deg) translateY(5px);">
+          <img src="img/GOW.jpg" alt="God of War" class="card-static">
+          <img src="img/GOW.gif" alt="God of War animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(3deg) translateY(50px);">
+          <img src="img/TLOU.jpg" alt="The Last of Us" class="card-static">
+          <img src="img/TLoUgif.gif" alt="The Last of Us animated" class="card-gif">
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 3: Brand Tagline + Nav Columns -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-body">
+
+          <!-- Left: Avatar + Tagline -->
+          <div class="footer-brand">
+
+            <p class="footer-tagline">
+              Design.<br>
+              Build.<br>
+              <span class="footer-tagline-muted">Ship.</span>
+            </p>
+          </div>
+
+          <!-- Right: Link columns -->
+          <div class="footer-nav">
+            <div class="footer-col">
+              <span class="footer-col-label">Navigate</span>
+              <ul role="list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="playground.html">Playground</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Connect</span>
+              <ul role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://read.cv/ayodejilemo" target="_blank" rel="noopener">Read.cv</a></li>
+                <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Availability</span>
+              <ul role="list">
+                <li class="footer-status"><span class="status-dot"></span>Open to work</li>
+                <li>Senior roles</li>
+                <li>Freelance</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 4: Bottom copyright bar -->
+    <div class="footer-bar">
+      <div class="container">
+        <p class="footer-copy">&copy; 2025 Ayodeji Lemo</p>
+        <p class="footer-copy">Product Designer · Lagos, Nigeria</p>
+      </div>
+    </div>
+
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

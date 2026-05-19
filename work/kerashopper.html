@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeraShopper — Case Study</title>
+  <meta name="description"
+    content="A mobile-first PWA built to streamline the entire workflow of a professional market errand shopper in Lagos, Nigeria.">
+  <meta property="og:title" content="KeraShopper — Case Study by Ayodeji Lemo">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages/case-study.css">
+  <!-- Custom Cursor -->
+  <link rel="stylesheet" href="../css/cursor.css">
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-profile">
+        <img src="../img/designer_portrait.jpg" alt="Ayodeji Lemo" class="nav-avatar">
+        <span class="nav-name">Ayodeji Lemo</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-menu" aria-expanded="false" aria-label="Menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../playground.html">Playground</a></li>
+        <li><a href="../contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Back Navigation -->
+  <nav class="cs-back" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="javascript:history.back()" class="cs-back-link">← Back</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ── Case Study Header ── -->
+    <header class="cs-header">
+      <div class="container">
+        <div class="cs-header-grid">
+
+          <!-- Left: Meta -->
+          <div class="cs-meta">
+            <div class="cs-meta-item">
+              <span class="text-label">Product</span>
+              <span class="cs-meta-value">KeraShopper</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Role</span>
+              <span class="cs-meta-value">Product Designer</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Year</span>
+              <span class="cs-meta-value">2026</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Platform</span>
+              <span class="cs-meta-value">Mobile PWA</span>
+            </div>
+          </div>
+
+          <!-- Right: Title + description -->
+          <div class="cs-header-content">
+            <div class="cs-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">PWA</span>
+            </div>
+            <h1 class="cs-title">KeraShopper</h1>
+            <p class="cs-subtitle">A mobile-first PWA built to streamline the entire workflow of a professional market errand shopper in Lagos, Nigeria.</p>
+            <div style="margin-top: 16px;">
+              <a href="https://kera-shopper.vercel.app/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500; color: var(--color-label-primary); text-decoration: underline; text-underline-offset: 4px;">Visit live app ↗</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Cover Image ── -->
+    <div class="cs-cover">
+      <div class="container">
+        <div class="cs-cover-image">
+          <img src="../img/Kerashopper%20banner.png" alt="KeraShopper App - Market Errand Shopping Case Study Cover">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Body Content ── -->
+    <article class="cs-body">
+      <div class="container">
+
+        <!-- Overview -->
+        <div class="cs-row">
+          <span class="cs-row-label">Overview</span>
+          <div class="cs-row-content">
+            <p>My wife runs a market errand shopping service in Lagos. She receives food item orders via WhatsApp, physically shops at a busy outdoor market, packages everything by client, and arranges delivery. Her workflow was entirely manual: paper lists, mental arithmetic, and memory-based tracking.</p>
+            <p>This led to frequent mistakes, forgotten items when shopping for multiple clients, pricing errors, and no visibility into actual profit after expenses. She needed a tool built specifically for her reality — not a generic shopping app.</p>
+          </div>
+        </div>
+
+        <!-- The Problem -->
+        <div class="cs-row">
+          <span class="cs-row-label">User Challenges</span>
+          <div class="cs-row-content">
+            <ul>
+              <li>Manual list management across multiple clients</li>
+              <li>Mental math for pricing and profit calculation</li>
+              <li>No structured workflow from order to delivery</li>
+              <li>Forgotten items when shopping for 3+ clients</li>
+              <li>No way to track expenses or actual profit</li>
+              <li>All data stored in WhatsApp chat history</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Technical Constraints</span>
+          <div class="cs-row-content">
+            <ul>
+              <li>Must work offline (unreliable market connectivity)</li>
+              <li>One-handed operation (holding shopping bags)</li>
+              <li>Large touch targets (wearing market gloves)</li>
+              <li>Fast load times on budget Android phone</li>
+              <li>No app store deployment complexity</li>
+              <li>Free hosting and infrastructure</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Research -->
+        <div class="cs-row">
+          <span class="cs-row-label">User Research</span>
+          <div class="cs-row-content">
+            <p>I shadowed my wife through three full shopping days, observing her actual workflow in the market. Key insights emerged:</p>
+            <div style="margin-top: 32px;">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">Paper-First Workflow</h4>
+              <p>She rewrites WhatsApp lists on paper, reorganizing by memory of where items are in the market.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Mental Arithmetic</h4>
+              <p>All pricing calculations done in her head while negotiating with vendors.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Spatial Memory</h4>
+              <p>Shopping route is optimized by physical market layout, not item categories.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Item Staging</h4>
+              <p>Purchased items stored at multiple stalls while continuing to shop.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Post-Shopping Sorting</h4>
+              <p>All items sorted and packaged by client after shopping is complete.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Blind Profit</h4>
+              <p>No clear view of profit until the end of the day, after all expenses.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design Principles -->
+        <div class="cs-row">
+          <span class="cs-row-label">Design Principles</span>
+          <div class="cs-row-content">
+            <p>Based on my research, I established three core design principles that guided every decision:</p>
+            <div style="margin-top: 32px;">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">Offline-First Architecture</h4>
+              <p>All data must work without internet. Markets don't have reliable WiFi, and her phone signal drops constantly inside covered market areas.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">One-Handed Optimization</h4>
+              <p>Primary actions in the bottom 40% of the screen, minimum 56px touch targets, swipe gestures for common tasks.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Dual Mental Models</h4>
+              <p>Support both category-based thinking (Fruits, Vegetables) and spatial memory (market route order) for list organization.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="cs-row">
+          <span class="cs-row-label">Features</span>
+          <div class="cs-row-content">
+            <div style="margin-bottom: 32px;">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 12px;">Single Order Management</h4>
+              <ul>
+                <li>Order entry with client name & item list</li>
+                <li>Real-time subtotal & service charge calculation</li>
+                <li>Expense tracking & profit estimation</li>
+                <li>Dual sorting: by category or market route</li>
+                <li>In-market tick-off with offline mode</li>
+                <li>Storage notes per item (staging locations)</li>
+                <li>Delivery details capture</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 12px;">Multi-Order Features</h4>
+              <ul>
+                <li>Combine 2+ client orders into one master list</li>
+                <li>Client name labels on each item</li>
+                <li>Combined tick-off with progress tracking</li>
+                <li>Separate profit calculation per client</li>
+                <li>Template system for recurring orders</li>
+                <li>Master catalogue of all market items</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech -->
+        <div class="cs-row">
+          <span class="cs-row-label">Technology Decisions</span>
+          <div class="cs-row-content">
+            <p>I chose a PWA over native apps to avoid app store complexity and enable instant updates. The offline-first architecture ensures reliability in low-connectivity environments.</p>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="cs-row">
+          <span class="cs-row-label">Measured Results</span>
+          <div class="cs-row-content">
+            <div style="margin-top: 0;">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">60% Faster Prep</h4>
+              <p>Order preparation reduced from 15 minutes to under 5 minutes per order.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Zero Errors</h4>
+              <p>100% calculation accuracy across 30-day usage period with 50+ orders.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">3x Order Capacity</h4>
+              <p>Successfully handles 3 concurrent client orders with no item mix-ups.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">Clear Profit View</h4>
+              <p>Real-time profit visibility enables better pricing and expense decisions.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">True Offline Mode</h4>
+              <p>App functions fully in market with zero connectivity issues.</p>
+              
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px;">8/10 Ease of Use</h4>
+              <p>User self-reports high satisfaction after 2 weeks of daily use.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="cs-row">
+          <span class="cs-row-label">What I Learned</span>
+          <div class="cs-row-content">
+            <p><strong>Design for actual context, not ideal conditions.</strong> My initial designs assumed reliable internet and two-handed use. Observing real use revealed the need for offline-first and one-handed optimization.</p>
+            <p><strong>Support multiple mental models.</strong> Users think about the same data in different ways at different times. Category sort works for order entry; route sort works in the market.</p>
+            <p><strong>Shipping beats perfecting.</strong> I launched with 70% of planned features. The missing 30% turned out to be less important than I thought. Real usage revealed what actually mattered.</p>
+            <p><strong>AI amplifies execution speed.</strong> Using Google Antigravity as a co-developer, I shipped production-quality code in 3 weeks as a solo builder. The AI handled implementation; I focused on product decisions.</p>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ── Up Next ── -->
+    <section class="cs-next">
+      <div class="container">
+        <div class="cs-next-header">
+          <h2 class="cs-next-title">Up next</h2>
+          <a href="../work.html" class="cs-next-btn">All works ↗</a>
+        </div>
+        <div class="grid-work">
+          <!-- Card 1: Reliance HMO -->
+          <article class="card" data-domain="fintech">
+            <a href="reliance.html" class="card-link" aria-label="Reliance HMO case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Reliance/Header.png" alt="Reliance Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">Landing page</span>
+                  <span class="overlay-tag tag-light">Redesign</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Reliance HMO</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">Landing Page Redesign</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 2: Gladys AI -->
+          <article class="card" data-domain="health">
+            <a href="gladys.html" class="card-link" aria-label="Gladys AI case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Gladys/Cover image.png" alt="Gladys AI Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">AI</span>
+                  <span class="overlay-tag tag-light">Health Tech</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Gladys AI</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">AI-Powered Personalized Skincare</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+
+    <!-- Zone 1: CTA Headline + Description -->
+    <div class="footer-cta">
+      <div class="container">
+        <div class="footer-cta-inner">
+          <div class="footer-cta-left">
+            <h2 class="footer-cta-headline">Got a project<br>in mind?<br>Let's talk.</h2>
+          </div>
+          <div class="footer-cta-right">
+            <p class="footer-cta-body">I'm currently open to senior product design roles and select freelance
+              opportunities. I work closely with product and engineering teams to ship experiences that make a real
+              difference — and I'd love to hear about what you're building.</p>
+            <a href="../contact.html" class="footer-cta-link">Send me a message →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 2: Scattered Polaroid Cards -->
+    <div class="footer-gallery">
+      <div class="container">
+        <div class="footer-gallery-header">
+          <h3>It is not all about work</h3>
+          <svg class="curly-arrow" width="80" height="80" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20,20 C60,-10 90,40 50,50 C10,60 30,90 80,90" stroke="currentColor" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M65,75 L80,90 L65,100" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer-gallery-inner" aria-hidden="true">
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-8deg) translateY(40px);">
+          <img src="../img/jujutsu.jpg" alt="Jujutsu Kaisen" class="card-static">
+          <img src="../img/jjk.gif" alt="Jujutsu Kaisen animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--info" style="transform: rotate(5deg) translateY(10px);">
+          <p>Lagos, Nigeria</p>
+          <p>dejilemo@gmail.com</p>
+          <p>Open to work</p>
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-4deg) translateY(60px);">
+          <img src="../img/Demon-slayer.png" alt="Demon Slayer" class="card-static">
+          <img src="../img/Demon Slayer GIF.gif" alt="Demon Slayer animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(7deg) translateY(5px);">
+          <img src="../img/GOW.jpg" alt="God of War" class="card-static">
+          <img src="../img/GOW.gif" alt="God of War animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(3deg) translateY(50px);">
+          <img src="../img/TLOU.jpg" alt="The Last of Us" class="card-static">
+          <img src="../img/TLoUgif.gif" alt="The Last of Us animated" class="card-gif">
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 3: Brand Tagline + Nav Columns -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-body">
+          <div class="footer-brand">
+            <p class="footer-tagline">
+              Design.<br>
+              Build.<br>
+              <span class="footer-tagline-muted">Ship.</span>
+            </p>
+          </div>
+          <div class="footer-nav">
+            <div class="footer-col">
+              <span class="footer-col-label">Navigate</span>
+              <ul role="list">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../playground.html">Playground</a></li>
+                <li><a href="../contact.html">Get in Touch</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Connect</span>
+              <ul role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://read.cv/ayodejilemo" target="_blank" rel="noopener">Read.cv</a></li>
+                <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Availability</span>
+              <ul role="list">
+                <li class="footer-status"><span class="status-dot"></span>Open to work</li>
+                <li>Senior roles</li>
+                <li>Freelance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 4: Bottom copyright bar -->
+    <div class="footer-bar">
+      <div class="container">
+        <p class="footer-copy">&copy; 2025 Ayodeji Lemo</p>
+        <p class="footer-copy">Product Designer · Lagos, Nigeria</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+
+</html>

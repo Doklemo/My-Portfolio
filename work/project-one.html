@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptobay Savings — Case Study</title>
+  <meta name="description" content="How I designed a habit-forming crypto savings experience for Cryptobay, helping users move from impulsive trading to disciplined saving.">
+  <meta property="og:title" content="Cryptobay Savings — Case Study by Ayodeji Lemo">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages/case-study.css">
+  <!-- Custom Cursor -->
+  <link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-profile">
+        <img src="../img/designer_portrait.jpg" alt="Ayodeji Lemo" class="nav-avatar">
+        <span class="nav-name">Ayodeji Lemo</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-menu" aria-expanded="false" aria-label="Menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../playground.html">Playground</a></li>
+        <li><a href="../contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Back Navigation -->
+  <nav class="cs-back" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="javascript:history.back()" class="cs-back-link">← Back</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Case Study Header -->
+    <header class="cs-header section">
+      <div class="container">
+        <div class="cs-meta">
+          <div class="cs-meta-item">
+            <span class="text-label">Company</span>
+            <span class="cs-meta-value">Cryptobay</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="text-label">Role</span>
+            <span class="cs-meta-value">Lead Product Designer</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="text-label">Timeline</span>
+            <span class="cs-meta-value">6 months · 2023</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="text-label">Platform</span>
+            <span class="cs-meta-value">iOS &amp; Android</span>
+          </div>
+        </div>
+
+        <div class="cs-tags">
+          <span class="tag">Fintech</span>
+          <span class="tag">Mobile</span>
+          <span class="tag">Consumer</span>
+        </div>
+
+        <h1 class="cs-title">From Traders to Savers</h1>
+        <p class="cs-subtitle">Designing a habit-forming crypto savings experience that moved impulsive traders to disciplined savers.</p>
+
+        <!-- TL;DR -->
+        <div class="cs-tldr">
+          <span class="text-label">TL;DR</span>
+          <ul class="cs-tldr-list" role="list">
+            <li>→ Research showed 78% of Cryptobay users were trading impulsively, not building wealth</li>
+            <li>→ Designed a goal-based savings vault with automated round-ups and lock periods</li>
+            <li>→ Savings activation increased by 62% within 3 months of launch</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover Image -->
+    <div class="cs-cover">
+      <div class="cs-cover-image img-placeholder" role="img" aria-label="Cryptobay Savings app screens"></div>
+    </div>
+
+    <!-- Body Content -->
+    <article class="cs-body">
+      <div class="container">
+        <div class="cs-prose">
+
+          <section class="cs-section">
+            <h2>The Problem</h2>
+            <p>Cryptobay had a retention problem disguised as a growth problem. Users were signing up — but most were trading reactively, chasing short-term gains, and leaving when markets moved against them. The product had no mechanism to encourage long-term wealth-building behaviour.</p>
+            <p>The core insight from early discovery: users wanted to grow their money, but the product was designed for speculation, not savings.</p>
+          </section>
+
+          <section class="cs-section">
+            <h2>My Role</h2>
+            <p>I was the sole product designer on this project, working closely with a PM, two engineers, and a behavioural economist who joined as a consultant. I led all phases: discovery, concept development, prototyping, testing, and handoff.</p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Discovery &amp; Research</h2>
+            <p>I ran 14 user interviews across two segments: active traders and lapsed users who had stopped using the app. I also reviewed 6 months of in-app behaviour data with the data team.</p>
+            <blockquote class="cs-blockquote">
+              "I keep meaning to save but when I open the app, I just end up checking prices and buying something. It happens every time."
+              <cite>— Interview participant, 28, Lagos</cite>
+            </blockquote>
+            <p>The pattern was clear: the trading interface was the path of least resistance. Saving required too many manual steps and had no motivating feedback loop.</p>
+          </section>
+
+          <!-- Key Insight Callout -->
+          <div class="cs-callout">
+            <span class="cs-callout-label">Key insight</span>
+            <p class="cs-callout-text">Users didn't lack the intention to save — they lacked the structure. The solution wasn't education, it was friction reduction and automated commitment devices.</p>
+          </div>
+
+          <section class="cs-section">
+            <h2>Design Process</h2>
+            <p>I explored three concepts in low-fidelity: a round-up model (save spare change from trades), a vault model (locked savings goals), and a DCA model (recurring automatic buys into a savings portfolio). We tested all three with 12 users over two rounds.</p>
+            <figure class="cs-figure">
+              <div class="cs-figure-image img-placeholder" role="img" aria-label="Three concept sketches for savings models"></div>
+              <figcaption>Three concepts explored: round-ups, goal vaults, and DCA automation</figcaption>
+            </figure>
+            <p>The vault model won — users responded to the idea of "locking in" savings as a psychological commitment device. We layered in round-ups as a secondary feature to make saving feel effortless.</p>
+          </section>
+
+          <section class="cs-section">
+            <h2>The Solution</h2>
+            <p>The Cryptobay Savings Vault: a goal-based savings feature with three core mechanics:</p>
+            <ul>
+              <li><strong>Savings Goals</strong> — users set a target amount, a name, and a lock period (7, 30, or 90 days)</li>
+              <li><strong>Round-ups</strong> — every trade automatically rounds up to the nearest $1 and deposits the difference into the vault</li>
+              <li><strong>Streak Rewards</strong> — a visual streak counter reinforces consistent saving behaviour</li>
+            </ul>
+          </section>
+
+          <!-- Outcomes -->
+          <div class="cs-outcomes">
+            <h2>Outcomes</h2>
+            <div class="cs-stats">
+              <div class="cs-stat">
+                <span class="cs-stat-number">+62%</span>
+                <span class="cs-stat-label">Savings activation rate</span>
+              </div>
+              <div class="cs-stat">
+                <span class="cs-stat-number">−34%</span>
+                <span class="cs-stat-label">Impulsive trade volume</span>
+              </div>
+              <div class="cs-stat">
+                <span class="cs-stat-number">3 mo</span>
+                <span class="cs-stat-label">Time to measurable impact</span>
+              </div>
+            </div>
+          </div>
+
+          <section class="cs-section">
+            <h2>Reflection</h2>
+            <p>This project reinforced that the best design interventions work with human psychology, not against it. The lock period was the most debated feature — some stakeholders felt it would cause churn. In testing, it did the opposite: users found commitment reassuring.</p>
+            <p>If I were to revisit this, I'd invest more in the onboarding goal-setting flow — we got it functional, but there was more to do to make it emotionally resonant.</p>
+          </section>
+
+        </div>
+      </div>
+    </article>
+
+    <!-- Next Project -->
+    <div class="cs-next">
+      <div class="container">
+        <a href="workskuad-talent.html" class="cs-next-link">
+          <span class="text-label">Next project</span>
+          <span class="cs-next-title">Reimagining Talent Acquisition →</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+
+    <!-- Zone 1: CTA Headline + Description -->
+    <div class="footer-cta">
+      <div class="container">
+        <div class="footer-cta-inner">
+          <div class="footer-cta-left">
+            <h2 class="footer-cta-headline">Got a project<br>in mind?<br>Let's talk.</h2>
+          </div>
+          <div class="footer-cta-right">
+            <p class="footer-cta-body">I'm currently open to senior product design roles and select freelance
+              opportunities. I work closely with product and engineering teams to ship experiences that make a real
+              difference — and I'd love to hear about what you're building.</p>
+            <a href="../contact.html" class="footer-cta-link">Send me a message →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 2: Scattered Polaroid Cards -->
+    <div class="footer-gallery">
+      <div class="container">
+        <div class="footer-gallery-header">
+          <h3>It is not all about work</h3>
+          <svg class="curly-arrow" width="80" height="80" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20,20 C60,-10 90,40 50,50 C10,60 30,90 80,90" stroke="currentColor" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M65,75 L80,90 L65,100" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer-gallery-inner" aria-hidden="true">
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-8deg) translateY(40px);">
+          <img src="../img/jujutsu.jpg" alt="Jujutsu Kaisen" class="card-static">
+          <img src="../img/jjk.gif" alt="Jujutsu Kaisen animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--info" style="transform: rotate(5deg) translateY(10px);">
+          <p>Lagos, Nigeria</p>
+          <p>dejilemo@gmail.com</p>
+          <p>Open to work</p>
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-4deg) translateY(60px);">
+          <img src="../img/Demon-slayer.png" alt="Demon Slayer" class="card-static">
+          <img src="../img/Demon Slayer GIF.gif" alt="Demon Slayer animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(7deg) translateY(5px);">
+          <img src="../img/GOW.jpg" alt="God of War" class="card-static">
+          <img src="../img/GOW.gif" alt="God of War animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(3deg) translateY(50px);">
+          <img src="../img/TLOU.jpg" alt="The Last of Us" class="card-static">
+          <img src="../img/TLoUgif.gif" alt="The Last of Us animated" class="card-gif">
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 3: Brand Tagline + Nav Columns -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-body">
+
+          <!-- Left: Avatar + Tagline -->
+          <div class="footer-brand">
+
+            <p class="footer-tagline">
+              Design.<br>
+              Build.<br>
+              <span class="footer-tagline-muted">Ship.</span>
+            </p>
+          </div>
+
+          <!-- Right: Link columns -->
+          <div class="footer-nav">
+            <div class="footer-col">
+              <span class="footer-col-label">Navigate</span>
+              <ul role="list">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../playground.html">Playground</a></li>
+                <li><a href="../contact.html">Get in Touch</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Connect</span>
+              <ul role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://read.cv/ayodejilemo" target="_blank" rel="noopener">Read.cv</a></li>
+                <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Availability</span>
+              <ul role="list">
+                <li class="footer-status"><span class="status-dot"></span>Open to work</li>
+                <li>Senior roles</li>
+                <li>Freelance</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 4: Bottom copyright bar -->
+    <div class="footer-bar">
+      <div class="container">
+        <p class="footer-copy">&copy; 2025 Ayodeji Lemo</p>
+        <p class="footer-copy">Product Designer · Lagos, Nigeria</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
