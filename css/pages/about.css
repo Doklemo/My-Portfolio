@@ -2,7 +2,7 @@
 
 /* Hero Section */
 .about-hero {
-  padding-top: var(--space-32);
+  padding-top: var(--space-32) !important;
 }
 
 .about-hero-inner {
