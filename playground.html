@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playground — Ayodeji Lemo</title>
-  <meta name="description" content="Experimental projects, prototypes, and explorations by Ayodeji Lemo.">
+  <meta name="description" content="Mini games and interactive experiments by Ayodeji Lemo — anime picture puzzles and a general knowledge word cross.">
   <meta property="og:title" content="Playground — Ayodeji Lemo">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,11 +17,425 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/pages/work.css">
-  <link rel="stylesheet" href="css/pages/home.css">
-  <link rel="stylesheet" href="css/pages/playground.css">
   <!-- Custom Cursor -->
   <link rel="stylesheet" href="css/cursor.css">
+  <style>
+    /* ── Playground Page Override ───────────────── */
+    body {
+      background: #07080f;
+      color: #e8e8ed;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav (dark theme override) ───────────────── */
+    .site-nav {
+      background: rgba(7, 8, 15, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-name, .nav-links a { color: rgba(255,255,255,0.7); }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: #fff; }
+    .btn-menu .nav-toggle-bar { background: rgba(255,255,255,0.7); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .pg-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 32px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Animated gradient orbs */
+    .pg-hero::before,
+    .pg-hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: orbFloat 8s ease-in-out infinite alternate;
+    }
+    .pg-hero::before {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+      top: -100px; left: -100px;
+    }
+    .pg-hero::after {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(16,185,129,0.14) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes orbFloat {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.1); }
+    }
+
+    /* Dot grid bg */
+    .pg-hero-bg-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .pg-hero-content { position: relative; z-index: 1; }
+
+    .pg-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+    }
+    .pg-eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 8px #a78bfa;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .pg-title {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .pg-title-accent {
+      background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 45%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pg-subtitle {
+      font-size: clamp(15px, 2vw, 19px);
+      color: rgba(255,255,255,0.4);
+      max-width: 500px;
+      margin: 0 auto 56px;
+      line-height: 1.65;
+    }
+
+    /* ── Scroll Cue ──────────────────────────────── */
+    .pg-scroll-cue {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.2); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      animation: bounceY 2s ease-in-out infinite;
+    }
+    @keyframes bounceY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+    .pg-scroll-cue svg { opacity: 0.4; }
+
+    /* ── Game Cards Grid ─────────────────────────── */
+    .pg-games {
+      padding: 24px 24px 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .pg-games-header {
+      text-align: center;
+    }
+    .pg-games-header h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .pg-games-header p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.35);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .pg-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    /* ── Game Card ───────────────────────────────── */
+    .game-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.35s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.25s;
+      cursor: pointer;
+      group: true;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    /* Card background */
+    .game-card-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Puzzle card — purple/indigo */
+    .game-card--puzzle { box-shadow: 0 0 0 1px rgba(167,139,250,0.1), 0 24px 64px rgba(124,58,237,0.2); }
+    .game-card--puzzle:hover { box-shadow: 0 0 0 1px rgba(167,139,250,0.2), 0 32px 80px rgba(124,58,237,0.35); }
+    .game-card--puzzle .game-card-bg {
+      background: linear-gradient(145deg, #110f1e 0%, #0e0c1a 60%, #120f22 100%);
+    }
+
+    /* Crossword card — teal/emerald */
+    .game-card--crossword { box-shadow: 0 0 0 1px rgba(52,211,153,0.1), 0 24px 64px rgba(5,150,105,0.15); }
+    .game-card--crossword:hover { box-shadow: 0 0 0 1px rgba(52,211,153,0.2), 0 32px 80px rgba(5,150,105,0.3); }
+    .game-card--crossword .game-card-bg {
+      background: linear-gradient(145deg, #080f0e 0%, #060d0c 60%, #091410 100%);
+    }
+
+    /* Glows */
+    .game-card-glow {
+      position: absolute; border-radius: 50%; filter: blur(60px);
+      pointer-events: none; z-index: 0;
+    }
+    .game-card--puzzle .game-card-glow {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 70%);
+      top: -60px; right: -60px;
+    }
+    .game-card--crossword .game-card-glow {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(52,211,153,0.18) 0%, transparent 70%);
+      bottom: -60px; left: -60px;
+    }
+
+    /* Card inner content */
+    .game-card-inner {
+      position: relative;
+      z-index: 1;
+      padding: 40px 36px 36px;
+      display: flex;
+      flex-direction: column;
+      min-height: 400px;
+    }
+
+    /* Top row: icon + badge */
+    .game-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .game-card-icon {
+      width: 64px; height: 64px; border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+    }
+    .game-card--puzzle .game-card-icon {
+      background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(139,92,246,0.1));
+      border: 1px solid rgba(167,139,250,0.2);
+      box-shadow: 0 4px 16px rgba(167,139,250,0.15);
+    }
+    .game-card--crossword .game-card-icon {
+      background: linear-gradient(135deg, rgba(52,211,153,0.18), rgba(16,185,129,0.1));
+      border: 1px solid rgba(52,211,153,0.2);
+      box-shadow: 0 4px 16px rgba(52,211,153,0.12);
+    }
+
+    .game-card-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; border-radius: 999px;
+      padding: 5px 12px;
+    }
+    .game-card--puzzle .game-card-badge {
+      background: rgba(167,139,250,0.12);
+      color: #c4b5fd;
+      border: 1px solid rgba(167,139,250,0.2);
+    }
+    .game-card--crossword .game-card-badge {
+      background: rgba(52,211,153,0.12);
+      color: #6ee7b7;
+      border: 1px solid rgba(52,211,153,0.2);
+    }
+    .game-card-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+    }
+    .game-card--puzzle .game-card-badge-dot { background: #a78bfa; }
+    .game-card--crossword .game-card-badge-dot { background: #34d399; }
+
+    /* Title + desc */
+    .game-card-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .game-card-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.65;
+      max-width: 100%;
+      margin-bottom: 32px;
+    }
+
+    /* Pills row */
+    .game-card-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .game-card-pill {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+      border-radius: 8px; padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Preview strip — mini character images for puzzle card */
+    .game-card-preview {
+      display: flex; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .game-card-preview-img {
+      width: 52px; height: 52px; border-radius: 12px;
+      overflow: hidden; border: 2px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .game-card-preview-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .game-card-preview-more {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.3);
+    }
+
+    /* Crossword mini preview */
+    .game-card-xword-preview {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+      margin-bottom: 28px;
+      max-width: 180px;
+    }
+    .xw-cell {
+      width: 100%; aspect-ratio: 1;
+      border-radius: 4px;
+    }
+    .xw-cell.xw-filled { background: rgba(52,211,153,0.2); border: 1px solid rgba(52,211,153,0.25); }
+    .xw-cell.xw-empty  { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); }
+    .xw-cell.xw-black  { background: rgba(0,0,0,0.4); border: 1px solid transparent; }
+
+    /* CTA row */
+    .game-card-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto;
+    }
+    .game-card-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 22px; border-radius: 14px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .game-card--puzzle .game-card-cta-btn {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    }
+    .game-card--puzzle .game-card-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(124,58,237,0.55);
+    }
+    .game-card--crossword .game-card-cta-btn {
+      background: linear-gradient(135deg, #059669, #0891b2);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(5,150,105,0.35);
+    }
+    .game-card--crossword .game-card-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(5,150,105,0.5);
+    }
+    .game-card-cta-btn:hover { color: #fff !important; }
+
+    .game-card-cta-label {
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.25); letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Divider ──────────────────────────────────── */
+    .pg-divider {
+      display: flex; align-items: center; gap: 20px;
+      max-width: 860px; margin: 0 auto;
+    }
+    .pg-divider-line {
+      flex: 1; height: 1px; background: rgba(255,255,255,0.05);
+    }
+    .pg-divider-text {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.15);
+    }
+
+    /* ── Footer override ──────────────────────────── */
+    .site-footer { background: #050508; }
+    .footer-cta-headline, .footer-tagline { color: #fff; }
+    .footer-cta-headline br { display: block; }
+    .footer-cta-body, .footer-col label, .footer-copy {
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-cta-link { color: #a78bfa; }
+    .footer-cta-link:hover { color: #c4b5fd; }
+    .footer-col a { color: rgba(255,255,255,0.45); }
+    .footer-col a:hover { color: #fff; }
+    .footer-col-label { color: rgba(255,255,255,0.2); }
+    .footer-tagline-muted { color: rgba(255,255,255,0.2); }
+    .footer-cta { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-gallery { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-main { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-bar { background: transparent; }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .pg-cards-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .game-card-inner { min-height: unset; padding: 32px 28px 28px; }
+    }
+    @media (max-width: 480px) {
+      .game-card-inner { padding: 28px 22px 22px; }
+      .game-card-title { font-size: 22px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -50,74 +464,193 @@
 
   <main id="main">
 
-    <!-- Interactive Canvas -->
-    <section class="playground-canvas" id="playground-canvas">
+    <!-- ── Hero ─────────────────────────────────── -->
+    <section class="pg-hero">
+      <div class="pg-hero-bg-dots" aria-hidden="true"></div>
+      <div class="pg-hero-content">
+        <div class="pg-eyebrow">
+          <span class="pg-eyebrow-dot" aria-hidden="true"></span>
+          Interactive Playground
+        </div>
+        <h1 class="pg-title">
+          Play.
+          <br>
+          <span class="pg-title-accent">Have Fun.</span>
+        </h1>
+        <p class="pg-subtitle">
+          Not everything has to be serious. Here are a couple of mini-games I built — anime puzzles and a general knowledge word cross.
+        </p>
+        <div class="pg-scroll-cue" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Scroll to play
+        </div>
+      </div>
+    </section>
 
-      <div id="canvas-pan-layer" style="position: absolute; inset: 0; transform-origin: 0 0; will-change: transform;">
-      <!-- Scattered design cards — positions set via JS on load -->
-      <div class="canvas-card canvas-card--lg" data-rotate="-3" data-img="img/mockup_1.png">
-        <img src="img/mockup_1.png" alt="Design mockup — Hero concept" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--md" data-rotate="2" data-img="img/mockup_2.png">
-        <img src="img/mockup_2.png" alt="Design mockup — App screen" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--lg" data-rotate="-1.5" data-img="img/mockup_3.png">
-        <img src="img/mockup_3.png" alt="Design mockup — Dashboard" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--sm" data-rotate="4" data-img="img/mockup_4.png">
-        <img src="img/mockup_4.png" alt="Design mockup — Component" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--md" data-rotate="-2.5" data-img="img/mockup_5.png">
-        <img src="img/mockup_5.png" alt="Design mockup — Illustration" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--sm" data-rotate="1" data-img="img/mockup_6.png">
-        <img src="img/mockup_6.png" alt="Design mockup — UI element" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--lg" data-rotate="3" data-img="img/mockup_7.png">
-        <img src="img/mockup_7.png" alt="Design mockup — Feature screen" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--xs" data-rotate="-4" data-img="img/mockup_8.png">
-        <img src="img/mockup_8.png" alt="Design mockup — Icon set" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--md" data-rotate="2.5" data-img="img/mockup_9.png">
-        <img src="img/mockup_9.png" alt="Design mockup — Prototype" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--sm" data-rotate="-1" data-img="img/mockup_10.png">
-        <img src="img/mockup_10.png" alt="Design mockup — Wireframe" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--xs" data-rotate="3.5" data-img="img/mockup_11.png">
-        <img src="img/mockup_11.png" alt="Design mockup — Typography" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--md" data-rotate="-2" data-img="img/mockup_12.png">
-        <img src="img/mockup_12.png" alt="Design mockup — Color system" loading="lazy">
-      </div>
-      <div class="canvas-card canvas-card--sm" data-rotate="1.5" data-img="img/mockup_13.png">
-        <img src="img/mockup_13.png" alt="Design mockup — Layout" loading="lazy">
+    <!-- ── Game Cards ─────────────────────────────── -->
+    <section class="pg-games" id="games" aria-labelledby="games-heading">
+
+      <div class="pg-games-header">
+        <h2 id="games-heading">Pick a Game</h2>
+        <p>Two games, zero instructions needed. Just click and go.</p>
       </div>
 
-      </div>
+      <div class="pg-cards-grid">
 
-      <!-- Hint pill -->
-      <div class="canvas-hint" id="canvas-hint">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 3v10M5 6l3-3 3 3M3 13h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Drag to rearrange · Click to preview
+        <!-- Card 1: Anime Picture Puzzle -->
+        <a href="games/puzzle.html" class="game-card game-card--puzzle" id="card-puzzle" aria-label="Play Anime Picture Puzzle">
+          <div class="game-card-bg" aria-hidden="true"></div>
+          <div class="game-card-glow" aria-hidden="true"></div>
+          <div class="game-card-inner">
+
+            <!-- Top row -->
+            <div class="game-card-top">
+              <div class="game-card-icon" aria-hidden="true">🧩</div>
+              <span class="game-card-badge">
+                <span class="game-card-badge-dot" aria-hidden="true"></span>
+                Puzzle
+              </span>
+            </div>
+
+            <!-- Title & desc -->
+            <h3 class="game-card-title">Anime Picture<br>Puzzle</h3>
+            <p class="game-card-desc">
+              Slide the scrambled tiles to reveal your favourite anime character. Choose from Naruto, Gojo, Zoro, or Tanjiro — and pick your difficulty.
+            </p>
+
+            <!-- Character preview strip -->
+            <div class="game-card-preview" aria-hidden="true">
+              <div class="game-card-preview-img">
+                <img src="img/games/naruto.png" alt="Naruto">
+              </div>
+              <div class="game-card-preview-img">
+                <img src="img/games/ichigo.png" alt="Ichigo">
+              </div>
+              <div class="game-card-preview-img">
+                <img src="img/games/sasuke.png" alt="Sasuke">
+              </div>
+              <div class="game-card-preview-img">
+                <img src="img/games/jinwoo.png" alt="Jinwoo">
+              </div>
+              <div class="game-card-preview-more">+6</div>
+            </div>
+
+            <!-- Feature pills -->
+            <div class="game-card-pills" aria-label="Features">
+              <span class="game-card-pill">10 Characters</span>
+              <span class="game-card-pill">Naruto · Bleach · More</span>
+              <span class="game-card-pill">3×3 · 4×4 · 5×5</span>
+              <span class="game-card-pill">Best Score</span>
+            </div>
+
+            <!-- CTA row -->
+            <div class="game-card-cta">
+              <span class="game-card-cta-label">Puzzle Game</span>
+              <span class="game-card-cta-btn">
+                Play Now
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.33 8h9.33M8.67 4.67L12 8l-3.33 3.33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+
+          </div>
+        </a>
+
+        <!-- Card 2: Word Cross -->
+        <a href="games/crossword.html" class="game-card game-card--crossword" id="card-crossword" aria-label="Play Word Cross Puzzle">
+          <div class="game-card-bg" aria-hidden="true"></div>
+          <div class="game-card-glow" aria-hidden="true"></div>
+          <div class="game-card-inner">
+
+            <!-- Top row -->
+            <div class="game-card-top">
+              <div class="game-card-icon" aria-hidden="true">🌍</div>
+              <span class="game-card-badge">
+                <span class="game-card-badge-dot" aria-hidden="true"></span>
+                Word Cross
+              </span>
+            </div>
+
+            <!-- Title & desc -->
+            <h3 class="game-card-title">Word Cross<br>Puzzle</h3>
+            <p class="game-card-desc">
+              Test your general knowledge! Tap letters to fill a crossword spanning geography, science, space, and nature — from Africa to Aurora.
+            </p>
+
+            <!-- Mini crossword preview grid -->
+            <div class="game-card-xword-preview" aria-hidden="true">
+              <!-- Row 1 -->
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-black"></div>
+              <!-- Row 2 -->
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <!-- Row 3 -->
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-black"></div>
+              <!-- Row 4 -->
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-filled"></div>
+              <!-- Row 5 -->
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-black"></div>
+              <div class="xw-cell xw-filled"></div>
+              <div class="xw-cell xw-black"></div>
+            </div>
+
+            <!-- Feature pills -->
+            <div class="game-card-pills" aria-label="Features">
+              <span class="game-card-pill">General Knowledge</span>
+              <span class="game-card-pill">11 Clues</span>
+              <span class="game-card-pill">Letter Bank</span>
+              <span class="game-card-pill">Hints</span>
+            </div>
+
+            <!-- CTA row -->
+            <div class="game-card-cta">
+              <span class="game-card-cta-label">Word Game</span>
+              <span class="game-card-cta-btn">
+                Play Now
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.33 8h9.33M8.67 4.67L12 8l-3.33 3.33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+
+          </div>
+        </a>
+
+      </div><!-- /.pg-cards-grid -->
+
+      <!-- Divider -->
+      <div class="pg-divider" aria-hidden="true">
+        <div class="pg-divider-line"></div>
+        <span class="pg-divider-text">More coming soon</span>
+        <div class="pg-divider-line"></div>
       </div>
 
     </section>
-
-    <!-- Lightbox Preview -->
-    <div class="canvas-lightbox" id="canvas-lightbox">
-      <button class="canvas-lightbox__close" id="lightbox-close" aria-label="Close preview">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="canvas-lightbox__img-wrap">
-        <img id="lightbox-img" src="" alt="" loading="lazy">
-      </div>
-    </div>
 
   </main>
 
@@ -183,18 +716,13 @@
     <div class="footer-main">
       <div class="container">
         <div class="footer-body">
-
-          <!-- Left: Avatar + Tagline -->
           <div class="footer-brand">
-
             <p class="footer-tagline">
               Design.<br>
               Build.<br>
               <span class="footer-tagline-muted">Ship.</span>
             </p>
           </div>
-
-          <!-- Right: Link columns -->
           <div class="footer-nav">
             <div class="footer-col">
               <span class="footer-col-label">Navigate</span>
@@ -210,7 +738,8 @@
               <span class="footer-col-label">Connect</span>
               <ul role="list">
                 <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
-                <li><a href="https://lemoayodeji.notion.site/Hi-I-m-Ayodeji-Lemo-9ca782801cff49f7b37e0bc9e91539ef" target="_blank" rel="noopener">Notion</a></li>
+                <li><a href="https://lemoayodeji.notion.site/Hi-I-m-Ayodeji-Lemo-9ca782801cff49f7b37e0bc9e91539ef"
+                    target="_blank" rel="noopener">Notion</a></li>
                 <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
               </ul>
             </div>
@@ -223,7 +752,6 @@
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -238,254 +766,44 @@
 
   </footer>
 
+  <script src="js/sounds.js"></script>
   <script src="js/main.js" defer></script>
 
-  <!-- Canvas Interaction Script -->
   <script>
+    /* Subtle parallax on hero orbs via mouse move */
     (function () {
-      const canvas = document.getElementById('playground-canvas');
-      const lightbox = document.getElementById('canvas-lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const lightboxClose = document.getElementById('lightbox-close');
-      const hint = document.getElementById('canvas-hint');
-      const cards = canvas.querySelectorAll('.canvas-card');
+      const hero = document.querySelector('.pg-hero');
+      if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      hero.addEventListener('mousemove', function (e) {
+        const rect = hero.getBoundingClientRect();
+        const cx = (e.clientX - rect.left) / rect.width - 0.5;
+        const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+        hero.style.setProperty('--mx', cx);
+        hero.style.setProperty('--my', cy);
+      });
+    })();
 
-      if (!canvas || !cards.length) return;
-
-      // ---- Layout: scatter cards in a grid-based pattern ----
-      // We use a grid approach to avoid overlaps, then add slight randomness
-      const PADDING_TOP = 100;  // clear the nav bar
-      const PADDING_X = 40;
-      const PADDING_BOTTOM = 60;
-
-      let topZ = 10;
-
-      function layoutCards() {
-        const vw = canvas.offsetWidth;
-        const cardCount = cards.length;
-
-        // Calculate grid dimensions
-        const cols = vw > 1024 ? 4 : vw > 768 ? 3 : 2;
-        const rows = Math.ceil(cardCount / cols);
-
-        const cellW = (vw - PADDING_X * 2) / cols;
-        const cellH = Math.max(220, (window.innerHeight - PADDING_TOP - PADDING_BOTTOM) / rows);
-
-        // Set canvas height to fit all rows
-        const totalHeight = PADDING_TOP + rows * cellH + PADDING_BOTTOM;
-        canvas.style.minHeight = Math.max(totalHeight, window.innerHeight) + 'px';
-
-        cards.forEach(function (card, i) {
-          const col = i % cols;
-          const row = Math.floor(i / cols);
-
-          // Center each card within its grid cell with some randomness
-          const cardW = card.offsetWidth;
-          const cardH = card.offsetHeight;
-
-          const centerX = PADDING_X + col * cellW + cellW / 2;
-          const centerY = PADDING_TOP + row * cellH + cellH / 2;
-
-          // Add randomness (±15% of cell size)
-          const jitterX = (Math.random() - 0.5) * cellW * 0.3;
-          const jitterY = (Math.random() - 0.5) * cellH * 0.25;
-
-          const x = Math.max(10, Math.min(vw - cardW - 10, centerX - cardW / 2 + jitterX));
-          const y = Math.max(PADDING_TOP, centerY - cardH / 2 + jitterY);
-
-          const rotate = parseFloat(card.dataset.rotate) || 0;
-
-          card.style.left = x + 'px';
-          card.style.top = y + 'px';
-          card.style.transform = 'rotate(' + rotate + 'deg)';
-          card.style.zIndex = i + 1;
-
-          // Stagger entrance animation
-          card.style.opacity = '0';
-          card.style.transform = 'rotate(' + rotate + 'deg) scale(0.85) translateY(30px)';
-          setTimeout(function () {
-            card.style.transition = 'opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'rotate(' + rotate + 'deg) scale(1) translateY(0)';
-          }, 80 + i * 60);
+    /* Card tilt micro-interaction + sounds */
+    (function () {
+      document.querySelectorAll('.game-card').forEach(card => {
+        let hovered = false;
+        card.addEventListener('mouseenter', function () {
+          if (!hovered) { SFX.hover(); hovered = true; }
         });
-
-        topZ = cardCount + 1;
-      }
-
-      layoutCards();
-
-      // Re-layout on resize (debounced)
-      let resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(layoutCards, 250);
+        card.addEventListener('mousemove', function (e) {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top)  / rect.height - 0.5;
+          card.style.transform = `translateY(-8px) scale(1.01) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = '';
+          hovered = false;
+        });
+        card.addEventListener('click', function () {
+          SFX.select();
+        });
       });
-
-      // ---- Drag & Pan Logic ----
-      const panLayer = document.getElementById('canvas-pan-layer');
-      let dragCard = null;
-      let dragOffsetX = 0;
-      let dragOffsetY = 0;
-      
-      let isPanning = false;
-      let panStartX = 0;
-      let panStartY = 0;
-      let currentPanX = 0;
-      let currentPanY = 0;
-      
-      let startPointerX = 0;
-      let startPointerY = 0;
-      let dragDistance = 0;
-      let hintHidden = false;
-
-      function getPointer(e) {
-        if (e.touches && e.touches.length) {
-          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        }
-        return { x: e.clientX, y: e.clientY };
-      }
-
-      function onDragStart(e) {
-        if (lightbox.classList.contains('is-open')) return;
-
-        const pointer = getPointer(e);
-        startPointerX = pointer.x;
-        startPointerY = pointer.y;
-        dragDistance = 0;
-        
-        const card = e.target.closest('.canvas-card');
-        
-        if (!card) {
-          // Start panning
-          isPanning = true;
-          panStartX = pointer.x - currentPanX;
-          panStartY = pointer.y - currentPanY;
-          canvas.style.cursor = 'grabbing';
-          if (e.type === 'mousedown') e.preventDefault();
-          return;
-        }
-
-        // Start dragging card
-        const rect = card.getBoundingClientRect();
-        // Calculate offset relative to the card's visual top-left
-        dragOffsetX = pointer.x - rect.left;
-        dragOffsetY = pointer.y - rect.top;
-
-        dragCard = card;
-
-        // Bring to front
-        topZ++;
-        card.style.zIndex = topZ;
-        card.classList.add('is-dragging');
-
-        // Remove rotation while dragging for clean feel
-        card.style.transform = 'rotate(0deg) scale(1.04)';
-
-        if (e.type === 'mousedown') e.preventDefault();
-
-        // Hide hint after first drag
-        if (!hintHidden && hint) {
-          hintHidden = true;
-          hint.classList.add('is-hidden');
-        }
-      }
-
-      function onDragMove(e) {
-        if (!dragCard && !isPanning) return;
-
-        const pointer = getPointer(e);
-        dragDistance = Math.abs(pointer.x - startPointerX) + Math.abs(pointer.y - startPointerY);
-
-        if (isPanning) {
-          currentPanX = pointer.x - panStartX;
-          currentPanY = pointer.y - panStartY;
-          
-          // Move the cards layer
-          if (panLayer) panLayer.style.transform = `translate(${currentPanX}px, ${currentPanY}px)`;
-          // Move the background dot grid
-          canvas.style.backgroundPosition = `${currentPanX}px ${currentPanY}px`;
-          return;
-        }
-
-        // Dragging card
-        const canvasRect = canvas.getBoundingClientRect();
-
-        // When placing a card, we need to factor out the current pan layer offset
-        // so it stays exactly where the cursor is.
-        const x = pointer.x - canvasRect.left - dragOffsetX - currentPanX + canvas.scrollLeft;
-        const y = pointer.y - canvasRect.top - dragOffsetY - currentPanY + canvas.scrollTop;
-
-        dragCard.style.left = x + 'px';
-        dragCard.style.top = y + 'px';
-      }
-
-      function onDragEnd(e) {
-        if (isPanning) {
-          isPanning = false;
-          canvas.style.cursor = 'default';
-        }
-
-        if (!dragCard) return;
-
-        const card = dragCard;
-        const rotate = parseFloat(card.dataset.rotate) || 0;
-
-        card.classList.remove('is-dragging');
-        card.style.transform = 'rotate(' + rotate + 'deg) scale(1)';
-
-        // If barely moved, treat as click → open lightbox
-        if (dragDistance < 6) {
-          openLightbox(card);
-        }
-
-        dragCard = null;
-      }
-
-      // Mouse events
-      canvas.addEventListener('mousedown', onDragStart);
-      window.addEventListener('mousemove', onDragMove);
-      window.addEventListener('mouseup', onDragEnd);
-
-      // Touch events
-      canvas.addEventListener('touchstart', onDragStart, { passive: false });
-      window.addEventListener('touchmove', onDragMove, { passive: false });
-      window.addEventListener('touchend', onDragEnd);
-
-      // ---- Lightbox ----
-      function openLightbox(card) {
-        const imgSrc = card.dataset.img;
-        if (!imgSrc) return;
-
-        lightboxImg.src = imgSrc;
-        lightboxImg.alt = card.querySelector('img').alt || '';
-        lightbox.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('is-open');
-        document.body.style.overflow = '';
-      }
-
-      lightboxClose.addEventListener('click', function (e) {
-        e.stopPropagation();
-        closeLightbox();
-      });
-
-      lightbox.addEventListener('click', function (e) {
-        // Close if clicking backdrop (not the image)
-        if (!e.target.closest('.canvas-lightbox__img-wrap')) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
-          closeLightbox();
-        }
-      });
-
     })();
   </script>
 

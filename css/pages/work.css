@@ -2,7 +2,8 @@
 
 /* Page Hero */
 .page-hero {
-  padding-bottom: var(--space-12);
+  padding-top: var(--space-48) !important;
+  padding-bottom: var(--space-4);
 }
 
 .page-title {
@@ -13,70 +14,10 @@
 }
 
 .page-sub {
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   color: var(--color-label-secondary);
   max-width: 560px;
   line-height: var(--leading-snug);
-}
-
-/* Filter System */
-.filter-wrapper input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.filter-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-2) var(--space-5);
-  border-radius: var(--radius-full);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  cursor: pointer;
-  border: none;
-  background: var(--color-fill-secondary);
-  color: var(--color-label-secondary);
-  transition: all var(--duration-fast) var(--ease-standard);
-  margin-right: var(--space-2);
-  margin-bottom: var(--space-2);
-}
-
-.filter-btn:hover {
-  background: var(--color-fill-tertiary);
-  color: var(--color-label-primary);
-}
-
-/* Checked state */
-input[type="radio"]:checked + .filter-btn {
-  background: var(--color-label-primary);
-  color: var(--color-fill-primary);
-}
-
-/* Filter bar visual separator */
-.filter-wrapper .grid-work {
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--color-separator);
-}
-
-/* CSS-only filtering via :checked sibling selectors */
-#filter-saas:checked ~ .grid-work .card:not([data-domain="saas"]) {
-  display: none;
-}
-
-#filter-fintech:checked ~ .grid-work .card:not([data-domain="fintech"]) {
-  display: none;
-}
-
-#filter-hr:checked ~ .grid-work .card:not([data-domain="hr"]) {
-  display: none;
-}
-
-#filter-b2c:checked ~ .grid-work .card:not([data-domain="b2c"]) {
-  display: none;
 }
 
 /* Card Link (full card clickable) */

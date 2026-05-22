@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Word Cross — Playground · Ayodeji Lemo</title>
+  <meta name="description" content="A general knowledge word cross puzzle. Fill in the crossword by tapping letters!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #0d1b4b;
+      min-height: 100vh;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+
+    /* ────────────── SKY BACKGROUND ────────────── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background: linear-gradient(175deg,
+        #0a1628 0%,
+        #0e1f5e 12%,
+        #1a2a80 25%,
+        #2e1f6e 38%,
+        #5b2190 52%,
+        #8e2f90 63%,
+        #c44585 74%,
+        #e8799a 83%,
+        #f2afc0 91%,
+        #fcd5de 100%
+      );
+    }
+
+    /* Moon */
+    .moon {
+      position: fixed; z-index: 1;
+      top: 48px; right: 60px;
+      width: 90px; height: 90px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffbe8, #f5e17a, #d4a937);
+      box-shadow:
+        0 0 30px 12px rgba(255,235,150,0.35),
+        0 0 70px 30px rgba(255,210,80,0.18),
+        0 0 120px 60px rgba(255,180,60,0.08);
+    }
+
+    /* Stars */
+    .stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .star {
+      position: absolute; border-radius: 50%;
+      background: #fff;
+      animation: twinkle ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0%   { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1;   transform: scale(1.2); }
+    }
+
+    /* Clouds */
+    .cloud {
+      position: fixed; z-index: 2;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      filter: blur(18px);
+    }
+
+    /* Cherry Blossom Trees */
+    .tree {
+      position: fixed; bottom: 0; z-index: 2; pointer-events: none;
+    }
+    .tree-left  { left:  -10px; }
+    .tree-right { right: -10px; }
+
+    .tree-trunk {
+      width: 16px; height: 80px;
+      background: linear-gradient(180deg, #8B4513, #4a2000);
+      margin: 0 auto; border-radius: 4px 4px 0 0;
+    }
+    .tree-canopy {
+      position: absolute; bottom: 65px;
+    }
+    .tree-blob {
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 40% 40%, #fda4c4, #f472b6, #c026a0);
+      filter: blur(3px);
+      position: absolute;
+    }
+
+    /* ────────────── TOP BAR ────────────── */
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 20px 12px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-back {
+      width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px; flex-shrink: 0;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.3); }
+
+    .bar-title {
+      flex: 1; text-align: center;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.8); text-transform: uppercase;
+    }
+
+    .score-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px; padding: 6px 12px;
+      font-size: 14px; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .score-coin {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: #78350f;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.5);
+    }
+
+    /* Progress bar under top bar */
+    .progress-bar-wrap {
+      position: fixed; top: 62px; left: 20px; right: 20px; z-index: 100;
+      height: 6px; background: rgba(255,255,255,0.2); border-radius: 999px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+      transition: width 0.5s ease;
+    }
+
+    /* ────────────── GRID AREA ────────────── */
+    .game-wrap {
+      position: relative; z-index: 10;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      padding: 86px 12px 210px;
+    }
+
+    .grid-container {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    }
+
+    .cw-grid {
+      display: grid;
+      gap: 4px;
+    }
+
+    /* Tiles */
+    .tile {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; font-weight: 900;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
+    }
+    .tile:active:not(.tile-black) { transform: scale(0.9); }
+
+    .tile-black {
+      background: transparent;
+      cursor: default; pointer-events: none;
+    }
+
+    /* Empty, not in active word */
+    .tile-empty {
+      background: rgba(255,255,255,0.82);
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    /* Empty, in active word */
+    .tile-active-empty {
+      background: #fde68a;
+      border: 2px solid #fbbf24;
+      box-shadow: 0 3px 10px rgba(251,191,36,0.4), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* Filled by user, in active word */
+    .tile-active-filled {
+      background: #f97316;
+      border: 2px solid #ea580c;
+      box-shadow: 0 3px 12px rgba(249,115,22,0.45);
+      color: #fff;
+    }
+
+    /* Locked (solved word) */
+    .tile-locked {
+      background: rgba(255,255,255,0.88);
+      border: 2px solid rgba(148,163,184,0.4);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      color: #334155;
+    }
+
+    /* Correct flash */
+    .tile-correct {
+      background: #4ade80 !important;
+      border-color: #22c55e !important;
+      color: #fff !important;
+    }
+    /* Error flash */
+    .tile-error {
+      background: #f87171 !important;
+      border-color: #ef4444 !important;
+      color: #fff !important;
+    }
+
+    .tile-num {
+      position: absolute; top: 2px; left: 3px;
+      font-size: 8px; font-weight: 800; color: rgba(30,30,60,0.45);
+      line-height: 1;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-6px); }
+      40%      { transform: translateX(6px); }
+      60%      { transform: translateX(-4px); }
+      80%      { transform: translateX(4px); }
+    }
+    .shake { animation: shake 0.45s ease forwards; }
+
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+    .pop { animation: pop 0.3s ease forwards; }
+
+    /* ────────────── BOTTOM PANEL ────────────── */
+    .bottom-panel {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: linear-gradient(180deg, rgba(60,20,100,0.97) 0%, rgba(40,10,80,0.99) 100%);
+      border-radius: 24px 24px 0 0;
+      padding: 12px 16px 16px;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+      backdrop-filter: blur(20px);
+    }
+
+    .clue-area {
+      margin-bottom: 10px; text-align: center;
+    }
+    .clue-dir-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 3px 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.6); text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .clue-text {
+      font-size: 15px; font-weight: 700; color: #fff; line-height: 1.35;
+    }
+
+    /* Letter Bank */
+    .bank-wrap {
+      display: flex; flex-direction: column; gap: 4px; align-items: center;
+    }
+    .bank-row {
+      display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;
+    }
+
+    .bank-tile {
+      width: 38px; height: 38px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.12s, opacity 0.2s, box-shadow 0.2s;
+      background: linear-gradient(180deg, #fb923c, #ea580c);
+      color: #fff;
+      box-shadow: 0 3px 0 #c2410c, 0 4px 8px rgba(234,88,12,0.3);
+      border: none;
+    }
+    .bank-tile:active { transform: translateY(2px); box-shadow: 0 1px 0 #c2410c; }
+    .bank-tile.used {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.25);
+      box-shadow: none;
+      cursor: default;
+      pointer-events: none;
+    }
+    .bank-tile.hint-btn {
+      background: linear-gradient(180deg, #ef4444, #b91c1c);
+      box-shadow: 0 3px 0 #991b1b, 0 4px 8px rgba(239,68,68,0.3);
+      font-size: 16px;
+    }
+    .bank-tile.hint-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #991b1b; }
+    .bank-tile.back-btn {
+      background: linear-gradient(180deg, #a78bfa, #7c3aed);
+      box-shadow: 0 3px 0 #5b21b6, 0 4px 8px rgba(124,58,237,0.3);
+      font-size: 16px;
+    }
+    .bank-tile.back-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #5b21b6; }
+
+    /* Clue list floating above bottom panel — scrollable side bar for desktop */
+    .clue-list-toggle {
+      position: fixed; top: 84px; left: 14px; z-index: 80;
+    }
+    .clue-list-btn {
+      background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px; padding: 8px 12px;
+      font-family: inherit; font-size: 12px; font-weight: 700;
+      color: #fff; cursor: pointer; transition: background 0.2s;
+    }
+    .clue-list-btn:hover { background: rgba(255,255,255,0.28); }
+
+    .clue-modal {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
+      display: none; align-items: flex-end; justify-content: center;
+    }
+    .clue-modal.open { display: flex; }
+    .clue-modal-inner {
+      background: rgba(30,15,60,0.98);
+      border-radius: 24px 24px 0 0; padding: 24px 20px 40px;
+      width: 100%; max-width: 480px; max-height: 70vh; overflow-y: auto;
+    }
+    .clue-modal-inner h2 {
+      font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.9);
+      margin-bottom: 16px; letter-spacing: 0.04em;
+    }
+    .clue-section-title {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin: 12px 0 6px;
+    }
+    .clue-row {
+      display: flex; gap: 10px; padding: 8px 10px; border-radius: 10px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .clue-row:hover { background: rgba(255,255,255,0.07); }
+    .clue-row.active-clue { background: rgba(251,191,36,0.15); }
+    .clue-row.solved-clue { opacity: 0.4; }
+    .clue-num { font-size: 12px; font-weight: 800; color: #fbbf24; min-width: 20px; }
+    .clue-desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+
+    /* Win modal */
+    .win-modal {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(16px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .win-modal.open { display: flex; }
+    .win-card {
+      background: linear-gradient(145deg, #1e0d4e, #2d1b69);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 28px; padding: 44px 36px; text-align: center;
+      max-width: 340px; width: 90%;
+    }
+    .win-emoji { font-size: 56px; margin-bottom: 14px; }
+    .win-title {
+      font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 8px;
+    }
+    .win-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .win-btn {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: #fff; border: none; border-radius: 16px;
+      padding: 14px 36px; font-family: inherit; font-size: 16px; font-weight: 800;
+      cursor: pointer; box-shadow: 0 4px 0 #c2410c;
+      transition: transform 0.1s;
+    }
+    .win-btn:active { transform: translateY(3px); box-shadow: none; }
+
+    @media (min-width: 640px) {
+      .tile { width: 44px; height: 44px; font-size: 19px; }
+      .clue-text { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg"></div>
+<div class="stars" id="stars"></div>
+<div class="moon"></div>
+
+<!-- Trees -->
+<div class="tree tree-left" id="tree-left">
+  <div class="tree-canopy"></div>
+  <div class="tree-trunk"></div>
+</div>
+<div class="tree tree-right" id="tree-right">
+  <div class="tree-canopy"></div>
+  <div class="tree-trunk"></div>
+</div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <a href="../playground.html" class="btn-back" aria-label="Back to Playground">←</a>
+  <div class="bar-title">Word Cross</div>
+  <div class="score-badge">
+    <div class="score-coin">✦</div>
+    <span id="score-display">0</span>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
+</div>
+
+<!-- Clue List Toggle -->
+<div class="clue-list-toggle">
+  <button class="clue-list-btn" onclick="openClueModal()">≡ Clues</button>
+</div>
+
+<!-- Clue List Modal -->
+<div class="clue-modal" id="clue-modal" onclick="if(event.target===this)closeClueModal()">
+  <div class="clue-modal-inner">
+    <h2>All Clues</h2>
+    <div class="clue-section-title">Across</div>
+    <div id="modal-across"></div>
+    <div class="clue-section-title" style="margin-top:16px">Down</div>
+    <div id="modal-down"></div>
+    <br>
+    <button class="win-btn" onclick="closeClueModal()" style="width:100%;margin-top:4px;">Close</button>
+  </div>
+</div>
+
+<!-- Win Modal -->
+<div class="win-modal" id="win-modal">
+  <div class="win-card">
+    <div class="win-emoji">🏆</div>
+    <div class="win-title">Brilliant!</div>
+    <div class="win-sub" id="win-msg">You solved the whole puzzle!</div>
+    <button class="win-btn" onclick="initGame()">Play Again</button>
+  </div>
+</div>
+
+<!-- Game Grid -->
+<div class="game-wrap">
+  <div class="grid-container">
+    <div class="cw-grid" id="cw-grid"></div>
+  </div>
+</div>
+
+<!-- Bottom Panel -->
+<div class="bottom-panel">
+  <div class="clue-area">
+    <div class="clue-dir-badge" id="clue-badge">1 Across</div>
+    <div class="clue-text" id="clue-text">Tap a clue or a highlighted cell to begin</div>
+  </div>
+  <div class="bank-wrap" id="bank-wrap"></div>
+</div>
+
+<script src="../js/sounds.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CROSSWORD DATA — General Knowledge
+   ═══════════════════════════════════════════════════════════
+
+   SPINE: CALIFORNIA Down at col=4, rows 0-9
+     C(0,4) A(1,4) L(2,4) I(3,4) F(4,4) O(5,4) R(6,4) N(7,4) I(8,4) A(9,4)
+
+   Each Across word STARTS at col=4 in its row, matching the
+   CALIFORNIA spine letter. AFRICA Across (row=0) has C at
+   position [4], matching the C of CALIFORNIA. ✓
+
+   All intersections verified:
+     AFRICA[4]  = C = CALIFORNIA[0] ✓
+     AMAZON[0]  = A = CALIFORNIA[1] ✓
+     LAVA[0]    = L = CALIFORNIA[2] ✓
+     ISLAND[0]  = I = CALIFORNIA[3] ✓
+     FOSSIL[0]  = F = CALIFORNIA[4] ✓
+     OCEAN[0]   = O = CALIFORNIA[5] ✓
+     ROCKET[0]  = R = CALIFORNIA[6] ✓
+     NEPTUNE[0] = N = CALIFORNIA[7] ✓
+     ICEBERG[0] = I = CALIFORNIA[8] ✓
+     AURORA[0]  = A = CALIFORNIA[9] ✓
+═══════════════════════════════════════════════════════════ */
+
+const WORDS = [
+  // Across
+  { num:1,  dir:'A', word:'AFRICA',   row:0, col:0, clue:"The world's second-largest continent, home to the Sahara Desert" },
+  { num:3,  dir:'A', word:'AMAZON',   row:1, col:4, clue:"The world's largest river by water flow, running through Brazil" },
+  { num:4,  dir:'A', word:'LAVA',     row:2, col:4, clue:"Molten rock that spills out when a volcano erupts" },
+  { num:5,  dir:'A', word:'ISLAND',   row:3, col:4, clue:"A piece of land completely surrounded by water" },
+  { num:6,  dir:'A', word:'FOSSIL',   row:4, col:4, clue:"Preserved remains of an ancient organism found in rock layers" },
+  { num:7,  dir:'A', word:'OCEAN',    row:5, col:4, clue:"A vast expanse of salt water covering most of Earth's surface" },
+  { num:8,  dir:'A', word:'ROCKET',   row:6, col:4, clue:"A vehicle that propels itself by burning fuel and expelling gas" },
+  { num:9,  dir:'A', word:'NEPTUNE',  row:7, col:4, clue:"The eighth and farthest planet from our Sun" },
+  { num:10, dir:'A', word:'ICEBERG',  row:8, col:4, clue:"A massive floating block of ice that broke off a glacier" },
+  { num:11, dir:'A', word:'AURORA',   row:9, col:4, clue:"Colourful natural light display in the sky near the poles" },
+  // Down
+  { num:2,  dir:'D', word:'CALIFORNIA', row:0, col:4, clue:"The most populous US state, home to Hollywood and Silicon Valley" },
+];
+
+/* Answer grid — null = black cell */
+const ANSWER = [
+//  0    1    2    3    4    5    6    7    8    9   10
+  ['A', 'F', 'R', 'I', 'C', 'A', null,null,null,null,null], // row 0  AFRICA
+  [null,null,null,null,'A', 'M', 'A', 'Z', 'O', 'N', null], // row 1  AMAZON
+  [null,null,null,null,'L', 'A', 'V', 'A', null,null,null], // row 2  LAVA
+  [null,null,null,null,'I', 'S', 'L', 'A', 'N', 'D', null], // row 3  ISLAND
+  [null,null,null,null,'F', 'O', 'S', 'S', 'I', 'L', null], // row 4  FOSSIL
+  [null,null,null,null,'O', 'C', 'E', 'A', 'N', null,null], // row 5  OCEAN
+  [null,null,null,null,'R', 'O', 'C', 'K', 'E', 'T', null], // row 6  ROCKET
+  [null,null,null,null,'N', 'E', 'P', 'T', 'U', 'N', 'E'], // row 7  NEPTUNE
+  [null,null,null,null,'I', 'C', 'E', 'B', 'E', 'R', 'G'], // row 8  ICEBERG
+  [null,null,null,null,'A', 'U', 'R', 'O', 'R', 'A', null], // row 9  AURORA
+];
+
+const ROWS = 10, COLS = 11;
+
+/* ── State ──────────────────────────── */
+let filled       = {};        // 'r,c' → letter
+let lockedCells  = new Set(); // cells permanently solved
+let solvedWords  = new Set();
+let activeWord   = null;
+let bankSlots    = [];
+let wordEmptyCells = [];
+let wordCursor   = 0;
+let cellToSlot   = {};
+let score        = 0;
+let timerSec     = 0;
+let timerInt     = null;
+
+/* ── Cell number lookup ─────────────── */
+const cellNum = {};
+WORDS.forEach(w => {
+  const k = `${w.row},${w.col}`;
+  if (!cellNum[k]) cellNum[k] = w.num;
+});
+
+/* ── Helpers ────────────────────────── */
+function getWordCells(w) {
+  return Array.from({ length: w.word.length }, (_, i) => ({
+    r: w.dir === 'A' ? w.row     : w.row + i,
+    c: w.dir === 'A' ? w.col + i : w.col,
+  }));
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function getTileEl(r, c) {
+  return document.querySelector(`.tile[data-r="${r}"][data-c="${c}"]`);
+}
+
+/* ── Render grid ────────────────────── */
+function renderGrid() {
+  const grid = document.getElementById('cw-grid');
+  // Count responsive size
+  const maxW = Math.min(window.innerWidth - 44, 600);
+  const cellSz = Math.floor(Math.min((maxW - 24) / COLS - 4, 44));
+  grid.style.gridTemplateColumns = `repeat(${COLS}, ${cellSz}px)`;
+  grid.innerHTML = '';
+
+  const activeWordCells = activeWord ? getWordCells(activeWord) : [];
+
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const ans = ANSWER[r][c];
+      const div = document.createElement('div');
+      div.dataset.r = r; div.dataset.c = c;
+      div.style.width = cellSz + 'px';
+      div.style.height = cellSz + 'px';
+
+      if (ans === null) {
+        div.className = 'tile tile-black';
+      } else {
+        const key = `${r},${c}`;
+        const isLocked = lockedCells.has(key);
+        const letter = filled[key] || '';
+        const inActiveWord = activeWordCells.some(cl => cl.r === r && cl.c === c);
+        const num = cellNum[key];
+
+        // Determine tile class
+        let cls = 'tile ';
+        if (isLocked) {
+          cls += 'tile-locked';
+        } else if (inActiveWord) {
+          cls += letter ? 'tile-active-filled' : 'tile-active-empty';
+        } else {
+          cls += letter ? 'tile-locked' : 'tile-empty';
+        }
+
+        div.className = cls;
+
+        if (num) {
+          const numEl = document.createElement('span');
+          numEl.className = 'tile-num';
+          numEl.textContent = num;
+          div.appendChild(numEl);
+        }
+
+        const letterEl = document.createElement('span');
+        letterEl.textContent = letter;
+        letterEl.style.fontSize = cellSz > 38 ? '19px' : '15px';
+        letterEl.style.fontWeight = '900';
+        div.appendChild(letterEl);
+
+        if (!isLocked) div.addEventListener('click', () => onTileClick(r, c));
+      }
+
+      grid.appendChild(div);
+    }
+  }
+}
+
+/* ── Tile click ─────────────────────── */
+function onTileClick(r, c) {
+  if (ANSWER[r][c] === null) return;
+
+  // If cell is in active word and user-filled: remove it
+  if (activeWord) {
+    const key = `${r},${c}`;
+    if (!lockedCells.has(key) && filled[key]) {
+      // Find this cell in wordEmptyCells
+      const idx = wordEmptyCells.findIndex(cl => cl.r === r && cl.c === c);
+      if (idx >= 0 && idx < wordCursor) {
+        SFX.undo();
+        // Remove this and all after it
+        for (let i = wordCursor - 1; i >= idx; i--) {
+          const cl = wordEmptyCells[i];
+          const k = `${cl.r},${cl.c}`;
+          const si = cellToSlot[k];
+          if (si !== undefined) bankSlots[si].used = false;
+          delete cellToSlot[k];
+          delete filled[k];
+        }
+        wordCursor = idx;
+        renderGrid();
+        renderBank();
+        return;
+      }
+    }
+  }
+
+  // Find a word containing this cell
+  const matches = WORDS.filter(w => {
+    const cells = getWordCells(w);
+    return cells.some(cl => cl.r === r && cl.c === c);
+  });
+  if (!matches.length) return;
+
+  // Prefer Across, or cycle
+  let chosen = matches.find(w => w.dir === 'A') || matches[0];
+  if (activeWord && matches.length > 1) {
+    const sameWord = matches.find(w => w.num === activeWord.num && w.dir === activeWord.dir);
+    if (sameWord) {
+      // Cycle to other direction
+      chosen = matches.find(w => !(w.num === activeWord.num && w.dir === activeWord.dir)) || chosen;
+    }
+  }
+
+  if (solvedWords.has(`${chosen.num}${chosen.dir}`)) {
+    // Try to find unsolved word in matches
+    const unsolved = matches.find(w => !solvedWords.has(`${w.num}${w.dir}`));
+    if (unsolved) chosen = unsolved;
+  }
+
+  SFX.select();
+  activateWord(chosen.num, chosen.dir);
+}
+
+/* ── Activate word ──────────────────── */
+function activateWord(num, dir) {
+  // Reset previous word's user fills (if incomplete)
+  if (activeWord && !solvedWords.has(`${activeWord.num}${activeWord.dir}`)) {
+    wordEmptyCells.forEach(cl => {
+      const k = `${cl.r},${cl.c}`;
+      if (!lockedCells.has(k)) {
+        delete filled[k];
+        delete cellToSlot[k];
+      }
+    });
+    bankSlots.forEach(s => s.used = false);
+  }
+
+  activeWord = WORDS.find(w => w.num === num && w.dir === dir);
+  if (!activeWord) return;
+
+  const allCells = getWordCells(activeWord);
+  wordEmptyCells = allCells.filter(({ r, c }) => !lockedCells.has(`${r},${c}`));
+  wordCursor = 0;
+  cellToSlot = {};
+
+  // Build bank: letters for empty cells + 3 random decoys
+  const neededLetters = wordEmptyCells.map(({ r, c }) => ANSWER[r][c]);
+  const decoyChars = 'BDJKMQVWXYZ'.split('').filter(l => !neededLetters.includes(l));
+  const numDecoys = Math.min(3, 10 - neededLetters.length);
+  const decoys = shuffle([...decoyChars]).slice(0, numDecoys);
+  const allLetters = shuffle([...neededLetters, ...decoys]);
+  bankSlots = allLetters.map(l => ({ letter: l, used: false }));
+
+  // Update clue display
+  const dirLabel = dir === 'A' ? 'Across' : 'Down';
+  document.getElementById('clue-badge').textContent = `${num} ${dirLabel}`;
+  document.getElementById('clue-text').textContent = activeWord.clue;
+
+  renderGrid();
+  renderBank();
+  renderClueModal();
+}
+
+/* ── Tap bank letter ────────────────── */
+function tapBank(slotIdx) {
+  if (bankSlots[slotIdx].used) return;
+  if (wordCursor >= wordEmptyCells.length) return;
+
+  const { r, c } = wordEmptyCells[wordCursor];
+  const letter = bankSlots[slotIdx].letter;
+  const key = `${r},${c}`;
+
+  filled[key] = letter;
+  bankSlots[slotIdx].used = true;
+  cellToSlot[key] = slotIdx;
+  wordCursor++;
+  SFX.pop();
+
+  renderGrid();
+  renderBank();
+
+  // Animate the tile
+  const el = getTileEl(r, c);
+  if (el) { el.classList.add('pop'); setTimeout(() => el.classList.remove('pop'), 300); }
+
+  // Check if all cells filled
+  if (wordCursor >= wordEmptyCells.length) {
+    setTimeout(checkActiveWord, 220);
+  }
+}
+
+/* ── Backspace ──────────────────────── */
+function doBackspace() {
+  if (wordCursor <= 0) return;
+  SFX.undo();
+  wordCursor--;
+  const { r, c } = wordEmptyCells[wordCursor];
+  const key = `${r},${c}`;
+  const si = cellToSlot[key];
+  if (si !== undefined) bankSlots[si].used = false;
+  delete cellToSlot[key];
+  delete filled[key];
+  renderGrid();
+  renderBank();
+}
+
+/* ── Check word ─────────────────────── */
+function checkActiveWord() {
+  const w = activeWord;
+  let correct = true;
+  wordEmptyCells.forEach(({ r, c }) => {
+    if (filled[`${r},${c}`] !== ANSWER[r][c]) correct = false;
+  });
+
+  if (correct) {
+    SFX.correct();
+    // Flash green
+    wordEmptyCells.forEach(({ r, c }) => {
+      const el = getTileEl(r, c);
+      if (el) { el.classList.add('tile-correct'); el.classList.remove('tile-active-filled'); }
+    });
+    // Lock cells
+    setTimeout(() => {
+      wordEmptyCells.forEach(({ r, c }) => lockedCells.add(`${r},${c}`));
+      solvedWords.add(`${w.num}${w.dir}`);
+      score += wordEmptyCells.length * 10 + 20;
+      document.getElementById('score-display').textContent = score;
+      updateProgress();
+      wordEmptyCells = [];
+      wordCursor = 0;
+      bankSlots = [];
+      cellToSlot = {};
+
+      // Find next unsolved word
+      setTimeout(() => {
+        const next = WORDS.find(word => !solvedWords.has(`${word.num}${word.dir}`));
+        if (next) {
+          activateWord(next.num, next.dir);
+        } else {
+          activeWord = null;
+          renderGrid();
+          renderBank();
+          showWin();
+        }
+      }, 300);
+    }, 600);
+  } else {
+    SFX.error();
+    // Flash red + shake
+    const firstEl = getTileEl(wordEmptyCells[0].r, wordEmptyCells[0].c);
+    const gridEl = document.getElementById('cw-grid');
+    gridEl.classList.add('shake');
+    setTimeout(() => gridEl.classList.remove('shake'), 450);
+
+    wordEmptyCells.forEach(({ r, c }) => {
+      const el = getTileEl(r, c);
+      if (el) { el.classList.add('tile-error'); el.classList.remove('tile-active-filled'); }
+    });
+
+    // Clear and reset after delay
+    setTimeout(() => {
+      wordEmptyCells.forEach(({ r, c }) => {
+        const k = `${r},${c}`;
+        delete filled[k]; delete cellToSlot[k];
+        const el = getTileEl(r, c);
+        if (el) { el.classList.remove('tile-error', 'tile-active-filled'); }
+      });
+      bankSlots.forEach(s => s.used = false);
+      wordCursor = 0;
+      renderGrid();
+      renderBank();
+    }, 700);
+  }
+}
+
+/* ── Hint: reveal one letter ─────────── */
+function doHint() {
+  if (wordCursor >= wordEmptyCells.length) return;
+  const { r, c } = wordEmptyCells[wordCursor];
+  const correctLetter = ANSWER[r][c];
+
+  // Find the matching bank slot
+  const si = bankSlots.findIndex((s, i) => !s.used && s.letter === correctLetter);
+  if (si >= 0) {
+    SFX.hint();
+    tapBank(si);
+    score = Math.max(0, score - 5);
+    document.getElementById('score-display').textContent = score;
+  }
+}
+
+/* ── Render bank ────────────────────── */
+function renderBank() {
+  const wrap = document.getElementById('bank-wrap');
+  wrap.innerHTML = '';
+
+  if (!activeWord || wordEmptyCells.length === 0) {
+    wrap.innerHTML = '<div style="color:rgba(255,255,255,0.35);font-size:13px;font-weight:700;text-align:center;padding:8px">Select a word to start</div>';
+    return;
+  }
+
+  // Split bank into rows (~6 per row)
+  const perRow = Math.min(8, Math.max(4, Math.ceil((bankSlots.length + 2) / 2)));
+  const rows = [];
+  let cur = [...bankSlots.map((s, i) => ({ ...s, idx: i }))];
+  while (cur.length) { rows.push(cur.splice(0, perRow)); }
+
+  rows.forEach(rowItems => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'bank-row';
+    rowItems.forEach(({ letter, used, idx }) => {
+      const btn = document.createElement('button');
+      btn.className = 'bank-tile' + (used ? ' used' : '');
+      btn.textContent = letter;
+      btn.setAttribute('aria-label', used ? 'Used letter' : `Letter ${letter}`);
+      if (!used) btn.addEventListener('click', () => tapBank(idx));
+      rowEl.appendChild(btn);
+    });
+    wrap.appendChild(rowEl);
+  });
+
+  // Control buttons row
+  const ctrlRow = document.createElement('div');
+  ctrlRow.className = 'bank-row';
+  ctrlRow.style.marginTop = '4px';
+
+  const hintBtn = document.createElement('button');
+  hintBtn.className = 'bank-tile hint-btn';
+  hintBtn.textContent = '?';
+  hintBtn.setAttribute('aria-label', 'Hint (costs 5 points)');
+  hintBtn.addEventListener('click', doHint);
+
+  const backBtn = document.createElement('button');
+  backBtn.className = 'bank-tile back-btn';
+  backBtn.textContent = '⌫';
+  backBtn.setAttribute('aria-label', 'Backspace');
+  backBtn.addEventListener('click', doBackspace);
+
+  ctrlRow.appendChild(hintBtn);
+  ctrlRow.appendChild(backBtn);
+  wrap.appendChild(ctrlRow);
+}
+
+/* ── Render clue modal ────────────────── */
+function renderClueModal() {
+  ['A','D'].forEach(dir => {
+    const el = document.getElementById(dir === 'A' ? 'modal-across' : 'modal-down');
+    el.innerHTML = '';
+    WORDS.filter(w => w.dir === dir).forEach(w => {
+      const row = document.createElement('div');
+      const isSolved = solvedWords.has(`${w.num}${w.dir}`);
+      const isActive = activeWord && activeWord.num === w.num && activeWord.dir === w.dir;
+      row.className = 'clue-row' + (isSolved ? ' solved-clue' : '') + (isActive ? ' active-clue' : '');
+      row.innerHTML = `<span class="clue-num">${w.num}</span><span class="clue-desc">${w.clue}</span>`;
+      row.addEventListener('click', () => { activateWord(w.num, w.dir); closeClueModal(); });
+      el.appendChild(row);
+    });
+  });
+}
+
+function openClueModal() {
+  renderClueModal();
+  document.getElementById('clue-modal').classList.add('open');
+}
+function closeClueModal() {
+  document.getElementById('clue-modal').classList.remove('open');
+}
+
+/* ── Progress ───────────────────────── */
+function updateProgress() {
+  const total = WORDS.length;
+  const solved = solvedWords.size;
+  const pct = total > 0 ? Math.round(solved / total * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+/* ── Win ────────────────────────────── */
+function showWin() {
+  clearInterval(timerInt);
+  SFX.win();
+  const m = Math.floor(timerSec / 60), s = timerSec % 60;
+  document.getElementById('win-msg').textContent =
+    `Solved in ${m}:${s.toString().padStart(2,'0')} · Score: ${score} pts 🎉`;
+  document.getElementById('win-modal').classList.add('open');
+}
+
+/* ── Init ───────────────────────────── */
+function initGame() {
+  filled = {}; lockedCells = new Set(); solvedWords = new Set();
+  activeWord = null; bankSlots = []; wordEmptyCells = []; wordCursor = 0; cellToSlot = {};
+  score = 0; timerSec = 0;
+  document.getElementById('score-display').textContent = '0';
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('win-modal').classList.remove('open');
+
+  renderGrid();
+  renderBank();
+
+  clearInterval(timerInt);
+  timerInt = setInterval(() => { timerSec++; }, 1000);
+
+  // Start with first word
+  activateWord(WORDS[0].num, WORDS[0].dir);
+}
+
+/* ── Background decoration ──────────── */
+function buildBg() {
+  // Stars
+  const starsCtr = document.getElementById('stars');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      top:${Math.random() * 65}%;
+      left:${Math.random() * 100}%;
+      animation-duration:${1.5 + Math.random() * 3}s;
+      animation-delay:${Math.random() * 3}s;
+    `;
+    starsCtr.appendChild(s);
+  }
+
+  // Trees
+  buildTree('tree-left',  'left',  180, 340);
+  buildTree('tree-right', 'right', 140, 300);
+}
+
+function buildTree(id, side, blobW, blobH) {
+  const tree = document.getElementById(id);
+  const canopy = tree.querySelector('.tree-canopy');
+  canopy.innerHTML = '';
+
+  // Blob clusters
+  const blobs = [
+    { w: blobW,        h: blobH * 0.75, x: 0,           y: 0 },
+    { w: blobW * 0.7,  h: blobH * 0.6,  x: blobW * 0.3, y: -blobH * 0.12 },
+    { w: blobW * 0.65, h: blobH * 0.5,  x: -blobW * 0.2,y: blobH * 0.1 },
+    { w: blobW * 0.5,  h: blobH * 0.4,  x: blobW * 0.1, y: -blobH * 0.25 },
+  ];
+  blobs.forEach(b => {
+    const el = document.createElement('div');
+    el.className = 'tree-blob';
+    el.style.cssText = `
+      width:${b.w}px; height:${b.h}px;
+      left:${b.x}px; top:${b.y}px;
+    `;
+    canopy.appendChild(el);
+  });
+
+  const totalH = blobH * 0.85;
+  canopy.style.cssText = `
+    position:absolute; bottom:70px;
+    ${side}:-10px; width:${blobW + 20}px; height:${totalH}px;
+  `;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  buildBg();
+  initGame();
+});
+
+window.addEventListener('resize', () => {
+  renderGrid();
+});
+</script>
+</body>
+</html>

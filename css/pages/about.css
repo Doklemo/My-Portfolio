@@ -51,14 +51,12 @@
 }
 
 /* Beliefs Section */
-.about-beliefs {
-}
 
 .beliefs-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-8);
-  margin-top: var(--space-8);
+  margin-top: var(--space-5);
 }
 
 @media (min-width: 640px) {
@@ -86,7 +84,7 @@
   font-size: var(--text-md);
   font-weight: var(--weight-semibold);
   color: var(--color-label-primary);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .belief-card p,
@@ -97,8 +95,6 @@
 }
 
 /* Experience Timeline */
-.about-experience {
-}
 
 .experience-timeline {
   display: flex;
@@ -158,8 +154,6 @@
 }
 
 /* Skills Section */
-.about-skills {
-}
 
 .skills-grid {
   display: grid;
@@ -190,8 +184,6 @@
 }
 
 /* CTA Section */
-.about-cta {
-}
 
 .cta-inner {
   display: flex;

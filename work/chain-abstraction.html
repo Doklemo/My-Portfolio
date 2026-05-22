@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chain Abstraction — Case Study</title>
+  <meta name="description"
+    content="How I designed a seamless Web3 payment experience that abstracts blockchain mechanics, letting users pay with any token across multiple chains.">
+  <meta property="og:title" content="Chain Abstraction — Case Study by Ayodeji Lemo">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages/case-study.css">
+  <!-- Custom Cursor -->
+  <link rel="stylesheet" href="../css/cursor.css">
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-profile">
+        <img src="../img/designer_portrait.jpg" alt="Ayodeji Lemo" class="nav-avatar">
+        <span class="nav-name">Ayodeji Lemo</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-menu" aria-expanded="false" aria-label="Menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../playground.html">Playground</a></li>
+        <li><a href="../contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Back Navigation -->
+  <nav class="cs-back" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="javascript:history.back()" class="cs-back-link">← Back</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="cs-header section">
+      <div class="container">
+        <div class="cs-header-grid">
+
+          <!-- Left: Metadata -->
+          <div class="cs-meta">
+            <div class="cs-meta-item">
+              <span class="text-label">Exploration</span>
+              <span class="cs-meta-value">Web3 Design</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Role</span>
+              <span class="cs-meta-value">UI/UX Designer</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Year</span>
+              <span class="cs-meta-value">2025</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="text-label">Platform</span>
+              <span class="cs-meta-value">Web App</span>
+            </div>
+          </div>
+
+          <!-- Right: Title + description -->
+          <div class="cs-header-content">
+            <div class="cs-tags">
+              <span class="tag">Web3</span>
+              <span class="tag">Case Study</span>
+            </div>
+            <h1 class="cs-title">Chain Abstraction</h1>
+            <p class="cs-subtitle">Simplifying Web3: Seamless payments across multiple blockchains without friction.</p>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <div class="cs-cover">
+      <div class="container">
+        <div class="cs-cover-image">
+          <img src="../img/Chain Abstraction/Cover image.png" alt="Chain Abstraction Platform Interface">
+        </div>
+      </div>
+    </div>
+
+    <article class="cs-body">
+      <div class="container">
+
+        <div class="cs-row">
+          <span class="cs-row-label">The Challenge</span>
+          <div class="cs-row-content">
+            <p>Right now, using different blockchains is like having to carry different currencies for different stores and manually exchanging them at the door. The average person shouldn't need to understand cross-chain bridges or gas fees to use blockchain apps—they should just work.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">The Concept</span>
+          <div class="cs-row-content">
+            <p>Chain abstraction is basically making it dead simple for users to pay for stuff on the blockchain without having to think about which chain they're using or what tokens they have. Imagine walking into a store and being able to pay with whatever you've got in your pocket—cash, credit card, or even foreign currency—and the store just handles it without you having to worry about the details.</p>
+            <p>In crypto terms, if you want to pay for something with ETH but the app runs on Solana, chain abstraction handles all the messy conversion stuff in the background. You don't need to manually bridge tokens or switch networks—you just click "pay" and the system figures out the rest.</p>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">User Flow &amp; Interface</span>
+          <div class="cs-row-content">
+            <p>We designed a step-by-step payment flow that abstracts away the technical complexities, keeping the interface simple and focused entirely on the user's intent:</p>
+            
+            <!-- Flow Steps List -->
+            <ol>
+              <li><strong>Connect Wallet</strong> — Connect any Web3 wallet across different networks in a single step.</li>
+              <li><strong>Overview Dashboard</strong> — A clean display of total holdings across all networks without fragmenting balances.</li>
+              <li><strong>Choose Assets &amp; Convert</strong> — Select which tokens from different chains you want to convert or use.</li>
+              <li><strong>Currency &amp; Destination</strong> — Set the destination address and choice of output token.</li>
+              <li><strong>Route Selection &amp; Finalize</strong> — Confirm the most cost-effective path and sign to complete the transaction.</li>
+            </ol>
+
+            <!-- Standalone Main Page Image -->
+            <div class="cs-full-image">
+              <img src="../img/Chain Abstraction/Main page.png" alt="Main Dashboard Interface">
+            </div>
+            <p class="cs-image-caption cs-image-caption--full" style="margin-bottom: var(--space-6);">Dashboard Overview — Global display of aggregate wallet balances across all networks without fragmenting by chain.</p>
+
+            <!-- Design Carousel -->
+            <div class="cs-carousel" id="flow-carousel" role="region" aria-label="Visual design mockups">
+              <div class="cs-carousel-viewport">
+                <div class="cs-carousel-track">
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Chain Abstraction/Connect wallet.png" alt="Connect Wallet Interface">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Chain Abstraction/Choose Assets and Convert.png" alt="Choose Assets and Convert Screen">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Chain Abstraction/Choose Currency and Destination.png" alt="Choose Currency and Destination Screen">
+                  </div>
+                  <div class="cs-carousel-slide">
+                    <img src="../img/Chain Abstraction/Choose Route and Finalize Transaction.png" alt="Choose Route and Finalize Transaction Screen">
+                  </div>
+                </div>
+              </div>
+              <!-- Dot indicators -->
+              <div class="cs-carousel-dots" role="tablist" aria-label="Flow steps">
+                <button class="cs-dot cs-dot--active" role="tab" aria-selected="true" aria-label="Connect Wallet"
+                  data-index="0"></button>
+                <button class="cs-dot" role="tab" aria-selected="false" aria-label="Choose Assets"
+                  data-index="1"></button>
+                <button class="cs-dot" role="tab" aria-selected="false" aria-label="Select Destination"
+                  data-index="2"></button>
+                <button class="cs-dot" role="tab" aria-selected="false" aria-label="Finalize Route"
+                  data-index="3"></button>
+              </div>
+            </div>
+            <!-- Dynamic caption -->
+            <p class="cs-image-caption cs-image-caption--full" id="flow-caption" style="margin-bottom: 0;">Connect Wallet — A unified connection dialog supporting multi-chain address resolution.</p>
+
+            <script>
+              (function () {
+                const captions = [
+                  'Connect Wallet — A unified connection dialog supporting multi-chain address resolution.',
+                  'Choose Assets & Convert — Intuitive selector to allocate and convert diverse cross-chain tokens.',
+                  'Select Destination — Straightforward interface to define recipient details and target network currency.',
+                  'Finalize & Route — Real-time transaction route optimization comparing speeds, fees, and execution paths.'
+                ];
+                const carousel = document.getElementById('flow-carousel');
+                const track = carousel.querySelector('.cs-carousel-track');
+                const dots = carousel.querySelectorAll('.cs-dot');
+                const caption = document.getElementById('flow-caption');
+                let current = 0;
+                const total = dots.length;
+
+                function goTo(index) {
+                  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                  caption.textContent = captions[index];
+                  dots.forEach(function (d, i) {
+                    d.classList.toggle('cs-dot--active', i === index);
+                    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                  });
+                  current = index;
+                }
+
+                dots.forEach(function (dot) {
+                  dot.addEventListener('click', function () {
+                    clearInterval(timer);
+                    goTo(parseInt(this.dataset.index));
+                    timer = setInterval(advance, 4000);
+                  });
+                });
+
+                function advance() { goTo((current + 1) % total); }
+                var timer = setInterval(advance, 4000);
+              })();
+            </script>
+          </div>
+        </div>
+
+        <div class="cs-row">
+          <span class="cs-row-label">Reflection</span>
+          <div class="cs-row-content">
+            <p>Web3 UX represents one of the largest friction points for mainstream adoption. By removing the need for manual bridging and gas fee complexity, chain abstraction changes the paradigm of crypto interactions.</p>
+            <p>This exploration was a deep-dive into simplifying transaction states, managing latency transparency, and building a user experience that prioritizes user intent over protocol mechanics.</p>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <section class="cs-next">
+      <div class="container">
+        <div class="cs-next-header">
+          <h2 class="cs-next-title">Up next</h2>
+          <a href="../work.html" class="cs-next-btn">All works ↗</a>
+        </div>
+        <div class="grid-work">
+          <!-- Card 1: Reliance HMO -->
+          <article class="card" data-domain="fintech">
+            <a href="reliance.html" class="card-link" aria-label="Reliance HMO case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Reliance/Header.png" alt="Reliance Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">Landing page</span>
+                  <span class="overlay-tag tag-light">Redesign</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Reliance HMO</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">Landing Page Redesign</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 2: Gladys AI -->
+          <article class="card" data-domain="health">
+            <a href="gladys.html" class="card-link" aria-label="Gladys AI case study">
+              <div class="card-image-wrapper">
+                <div class="card-image">
+                  <img src="../img/Gladys/Cover image.png" alt="Gladys AI Project Cover">
+                </div>
+                <div class="card-overlay-tags">
+                  <span class="overlay-tag">AI</span>
+                  <span class="overlay-tag tag-light">Health Tech</span>
+                </div>
+                <div class="card-overlay-arrow">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-title-group">
+                  <h2 class="card-title">Gladys AI</h2>
+                  <span class="card-separator">·</span>
+                  <p class="card-desc">AI-Powered Personalized Skincare</p>
+                </div>
+                <span class="card-year">2026</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+
+    <!-- Zone 1: CTA Headline + Description -->
+    <div class="footer-cta">
+      <div class="container">
+        <div class="footer-cta-inner">
+          <div class="footer-cta-left">
+            <h2 class="footer-cta-headline">Got a project<br>in mind?<br>Let's talk.</h2>
+          </div>
+          <div class="footer-cta-right">
+            <p class="footer-cta-body">I'm currently open to senior product design roles and select freelance
+              opportunities. I work closely with product and engineering teams to ship experiences that make a real
+              difference — and I'd love to hear about what you're building.</p>
+            <a href="../contact.html" class="footer-cta-link">Send me a message →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 2: Scattered Polaroid Cards -->
+    <div class="footer-gallery">
+      <div class="container">
+        <div class="footer-gallery-header">
+          <h3>It is not all about work</h3>
+          <svg class="curly-arrow" width="80" height="80" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20,20 C60,-10 90,40 50,50 C10,60 30,90 80,90" stroke="currentColor" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M65,75 L80,90 L65,100" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer-gallery-inner" aria-hidden="true">
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-8deg) translateY(40px);">
+          <img src="../img/jujutsu.jpg" alt="Jujutsu Kaisen" class="card-static">
+          <img src="../img/jjk.gif" alt="Jujutsu Kaisen animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--info" style="transform: rotate(5deg) translateY(10px);">
+          <p>Lagos, Nigeria</p>
+          <p>dejilemo@gmail.com</p>
+          <p>Open to work</p>
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(-4deg) translateY(60px);">
+          <img src="../img/Demon-slayer.png" alt="Demon Slayer" class="card-static">
+          <img src="../img/Demon Slayer GIF.gif" alt="Demon Slayer animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(7deg) translateY(5px);">
+          <img src="../img/GOW.jpg" alt="God of War" class="card-static">
+          <img src="../img/GOW.gif" alt="God of War animated" class="card-gif">
+        </div>
+        <div class="footer-card footer-card--has-gif" style="transform: rotate(3deg) translateY(50px);">
+          <img src="../img/TLOU.jpg" alt="The Last of Us" class="card-static">
+          <img src="../img/TLoUgif.gif" alt="The Last of Us animated" class="card-gif">
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 3: Brand Tagline + Nav Columns -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-body">
+
+          <!-- Left: Avatar + Tagline -->
+          <div class="footer-brand">
+
+            <p class="footer-tagline">
+              Design.<br>
+              Build.<br>
+              <span class="footer-tagline-muted">Ship.</span>
+            </p>
+          </div>
+
+          <!-- Right: Link columns -->
+          <div class="footer-nav">
+            <div class="footer-col">
+              <span class="footer-col-label">Navigate</span>
+              <ul role="list">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../playground.html">Playground</a></li>
+                <li><a href="../contact.html">Get in Touch</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Connect</span>
+              <ul role="list">
+                <li><a href="https://www.linkedin.com/in/ayodejilemo" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://lemoayodeji.notion.site/Hi-I-m-Ayodeji-Lemo-9ca782801cff49f7b37e0bc9e91539ef"
+                    target="_blank" rel="noopener">Notion</a></li>
+                <li><a href="mailto:dejilemo@gmail.com">Email</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-label">Availability</span>
+              <ul role="list">
+                <li class="footer-status"><span class="status-dot"></span>Open to work</li>
+                <li>Full-time</li>
+                <li>Freelance</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 4: Bottom copyright bar -->
+    <div class="footer-bar">
+      <div class="container">
+        <p class="footer-copy">&copy; 2025 Ayodeji Lemo</p>
+        <p class="footer-copy">Product Designer · Lagos, Nigeria</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+
+</html>
