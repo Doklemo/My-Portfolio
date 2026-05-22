@@ -207,6 +207,24 @@
   color: var(--color-label-secondary);
 }
 
+@media (max-width: 768px) {
+  .card-info {
+    align-items: flex-start;
+  }
+  .card-title-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+  .card-separator {
+    display: none;
+  }
+  .card-desc {
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+}
+
 /* Tags */
 .tag {
   display: inline-flex;
