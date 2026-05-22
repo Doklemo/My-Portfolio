@@ -200,6 +200,14 @@
   border-top-color: rgba(255, 255, 255, 0.18);
 }
 
+/* Mobile dropdown dark mode */
+@media (max-width: 767px) {
+  .nav--on-dark .nav-links {
+    background: rgba(20, 20, 20, 0.97);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
