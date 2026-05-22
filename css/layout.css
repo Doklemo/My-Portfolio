@@ -94,6 +94,10 @@
   overflow: hidden;
 }
 
+.site-nav.menu-open {
+  overflow: visible;
+}
+
 /* Specular highlight — crisp top edge line */
 .site-nav::before {
   content: '';

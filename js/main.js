@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
 
   if (toggle && navLinks) {
+    const siteNav = document.querySelector('.site-nav');
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!isOpen));
       navLinks.classList.toggle('is-open');
+      if (siteNav) siteNav.classList.toggle('menu-open', !isOpen);
     });
 
     // Close mobile nav when a link is clicked
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         toggle.setAttribute('aria-expanded', 'false');
         navLinks.classList.remove('is-open');
+        if (siteNav) siteNav.classList.remove('menu-open');
       });
     });
   }
