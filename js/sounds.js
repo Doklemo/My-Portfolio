@@ -27,6 +27,31 @@ const SFX = (() => {
     if (ctx && ctx.state === 'suspended') ctx.resume();
   }
 
+  /** Mobile browsers require unlocking the audio context inside a gesture */
+  function unlockAudio() {
+    if (!ensureCtx()) return;
+    resume();
+    // Play a silent oscillator to fully unlock
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    gain.gain.value = 0;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(0);
+    osc.stop(0.001);
+
+    ['touchstart', 'touchend', 'click', 'keydown'].forEach(evt => {
+      document.removeEventListener(evt, unlockAudio, true);
+    });
+  }
+
+  // Bind unlock to first interaction
+  if (typeof document !== 'undefined') {
+    ['touchstart', 'touchend', 'click', 'keydown'].forEach(evt => {
+      document.addEventListener(evt, unlockAudio, { once: true, capture: true });
+    });
+  }
+
   /* ── Primitive helpers ───────────────────────────── */
 
   /** Play a single sine/triangle tone that fades out */
