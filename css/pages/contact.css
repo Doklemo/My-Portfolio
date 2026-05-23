@@ -5,6 +5,12 @@
   padding-top: var(--space-48) !important;
 }
 
+@media (max-width: 767px) {
+  .contact-hero {
+    padding-top: var(--space-24) !important;
+  }
+}
+
 .contact-hero-inner {
   display: grid;
   grid-template-columns: 1fr;

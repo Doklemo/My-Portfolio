@@ -6,6 +6,12 @@
   padding-bottom: var(--space-4);
 }
 
+@media (max-width: 767px) {
+  .page-hero {
+    padding-top: var(--space-24) !important;
+  }
+}
+
 .page-title {
   font-size: var(--text-3xl);
   font-weight: var(--weight-semibold);
