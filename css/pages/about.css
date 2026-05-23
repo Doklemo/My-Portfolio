@@ -1,5 +1,16 @@
 /* About Page Styles */
 
+/* Reduce gap between sections specifically on this page */
+.section {
+  padding-block: var(--space-16);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--space-8);
+  }
+}
+
 /* Hero Section */
 .about-hero {
   padding-top: var(--space-48) !important;
