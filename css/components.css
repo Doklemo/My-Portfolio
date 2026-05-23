@@ -111,6 +111,13 @@
   transform: scale(1.03);
 }
 
+@media (max-width: 768px) {
+  .card-image-wrapper,
+  .card-image {
+    border-radius: var(--radius-md);
+  }
+}
+
 /* Overlay Tags */
 .card-overlay-tags {
   position: absolute;
