@@ -383,6 +383,24 @@
       .tile { width: 44px; height: 44px; font-size: 19px; }
       .clue-text { font-size: 18px; }
     }
+
+    @media (max-width: 639px) {
+      .tile { width: 28px; height: 28px; font-size: 14px; }
+      .grid-container { padding: 8px; }
+      .clue-list-toggle { top: 76px; left: 50%; transform: translateX(-50%); }
+      .game-wrap { padding-top: 130px; padding-bottom: 220px; }
+      .bank-tile { width: 34px; height: 34px; font-size: 14px; }
+      .clue-text { font-size: 13px; line-height: 1.3; }
+      .bottom-panel { padding: 10px 10px 14px; }
+    }
+
+    @media (max-width: 380px) {
+      .tile { width: 24px; height: 24px; font-size: 12px; }
+      .grid-container { padding: 6px; }
+      .bank-tile { width: 30px; height: 30px; font-size: 13px; }
+      .clue-list-toggle { top: 70px; }
+      .game-wrap { padding-top: 120px; }
+    }
   </style>
 </head>
 <body>
