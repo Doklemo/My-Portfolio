@@ -23,7 +23,7 @@
   font-size: var(--text-base);
   color: var(--color-label-secondary);
   max-width: 560px;
-  line-height: var(--leading-snug);
+  line-height: var(--leading-normal);
 }
 
 /* Card Link (full card clickable) */

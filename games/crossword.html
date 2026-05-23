@@ -422,7 +422,10 @@
 <!-- Top Bar -->
 <div class="top-bar">
   <a href="../playground.html" class="btn-back" aria-label="Back to Playground">←</a>
-  <div class="bar-title">Word Cross</div>
+  <div class="bar-title" onclick="openLevelModal()" style="cursor:pointer; display:flex; align-items:center; gap:6px;">
+    <span id="current-level-display">Level 1</span>
+    <span style="font-size:12px; opacity:0.6">▼</span>
+  </div>
   <div class="score-badge">
     <div class="score-coin">✦</div>
     <span id="score-display">0</span>
@@ -452,13 +455,23 @@
   </div>
 </div>
 
+<!-- Level Modal -->
+<div class="clue-modal" id="level-modal" onclick="if(event.target===this)closeLevelModal()">
+  <div class="clue-modal-inner" style="text-align: center;">
+    <h2>Select Level</h2>
+    <div id="level-list" style="display:flex; flex-direction:column; gap:8px; margin-top:16px;"></div>
+    <br>
+    <button class="win-btn" onclick="closeLevelModal()" style="width:100%;margin-top:4px; background:rgba(255,255,255,0.1)">Cancel</button>
+  </div>
+</div>
+
 <!-- Win Modal -->
 <div class="win-modal" id="win-modal">
   <div class="win-card">
     <div class="win-emoji">🏆</div>
     <div class="win-title">Brilliant!</div>
     <div class="win-sub" id="win-msg">You solved the whole puzzle!</div>
-    <button class="win-btn" onclick="initGame()">Play Again</button>
+    <button class="win-btn" id="win-action-btn" onclick="nextLevel()">Next Level</button>
   </div>
 </div>
 
@@ -504,38 +517,92 @@
      AURORA[0]  = A = CALIFORNIA[9] ✓
 ═══════════════════════════════════════════════════════════ */
 
-const WORDS = [
-  // Across
-  { num:1,  dir:'A', word:'AFRICA',   row:0, col:0, clue:"The world's second-largest continent, home to the Sahara Desert" },
-  { num:3,  dir:'A', word:'AMAZON',   row:1, col:4, clue:"The world's largest river by water flow, running through Brazil" },
-  { num:4,  dir:'A', word:'LAVA',     row:2, col:4, clue:"Molten rock that spills out when a volcano erupts" },
-  { num:5,  dir:'A', word:'ISLAND',   row:3, col:4, clue:"A piece of land completely surrounded by water" },
-  { num:6,  dir:'A', word:'FOSSIL',   row:4, col:4, clue:"Preserved remains of an ancient organism found in rock layers" },
-  { num:7,  dir:'A', word:'OCEAN',    row:5, col:4, clue:"A vast expanse of salt water covering most of Earth's surface" },
-  { num:8,  dir:'A', word:'ROCKET',   row:6, col:4, clue:"A vehicle that propels itself by burning fuel and expelling gas" },
-  { num:9,  dir:'A', word:'NEPTUNE',  row:7, col:4, clue:"The eighth and farthest planet from our Sun" },
-  { num:10, dir:'A', word:'ICEBERG',  row:8, col:4, clue:"A massive floating block of ice that broke off a glacier" },
-  { num:11, dir:'A', word:'AURORA',   row:9, col:4, clue:"Colourful natural light display in the sky near the poles" },
-  // Down
-  { num:2,  dir:'D', word:'CALIFORNIA', row:0, col:4, clue:"The most populous US state, home to Hollywood and Silicon Valley" },
+const LEVELS = [
+  {
+    id: 1, title: 'Starter', rows: 10, cols: 11,
+    words: [
+      { num:1,  dir:'A', word:'AFRICA',   row:0, col:0, clue:"The world's second-largest continent, home to the Sahara Desert" },
+      { num:3,  dir:'A', word:'AMAZON',   row:1, col:4, clue:"The world's largest river by water flow, running through Brazil" },
+      { num:4,  dir:'A', word:'LAVA',     row:2, col:4, clue:"Molten rock that spills out when a volcano erupts" },
+      { num:5,  dir:'A', word:'ISLAND',   row:3, col:4, clue:"A piece of land completely surrounded by water" },
+      { num:6,  dir:'A', word:'FOSSIL',   row:4, col:4, clue:"Preserved remains of an ancient organism found in rock layers" },
+      { num:7,  dir:'A', word:'OCEAN',    row:5, col:4, clue:"A vast expanse of salt water covering most of Earth's surface" },
+      { num:8,  dir:'A', word:'ROCKET',   row:6, col:4, clue:"A vehicle that propels itself by burning fuel and expelling gas" },
+      { num:9,  dir:'A', word:'NEPTUNE',  row:7, col:4, clue:"The eighth and farthest planet from our Sun" },
+      { num:10, dir:'A', word:'ICEBERG',  row:8, col:4, clue:"A massive floating block of ice that broke off a glacier" },
+      { num:11, dir:'A', word:'AURORA',   row:9, col:4, clue:"Colourful natural light display in the sky near the poles" },
+      { num:2,  dir:'D', word:'CALIFORNIA', row:0, col:4, clue:"The most populous US state, home to Hollywood and Silicon Valley" },
+    ],
+    answer: [
+      ['A', 'F', 'R', 'I', 'C', 'A', null,null,null,null,null],
+      [null,null,null,null,'A', 'M', 'A', 'Z', 'O', 'N', null],
+      [null,null,null,null,'L', 'A', 'V', 'A', null,null,null],
+      [null,null,null,null,'I', 'S', 'L', 'A', 'N', 'D', null],
+      [null,null,null,null,'F', 'O', 'S', 'S', 'I', 'L', null],
+      [null,null,null,null,'O', 'C', 'E', 'A', 'N', null,null],
+      [null,null,null,null,'R', 'O', 'C', 'K', 'E', 'T', null],
+      [null,null,null,null,'N', 'E', 'P', 'T', 'U', 'N', 'E'],
+      [null,null,null,null,'I', 'C', 'E', 'B', 'E', 'R', 'G'],
+      [null,null,null,null,'A', 'U', 'R', 'O', 'R', 'A', null]
+    ]
+  },
+  {
+    id: 2, title: 'Intermediate', rows: 8, cols: 9,
+    words: [
+      { num:1, dir:'A', word:'DESERT', row:0, col:3, clue:"A barren area of landscape where little precipitation occurs" },
+      { num:3, dir:'A', word:'CASTLE', row:1, col:0, clue:"A large building typically of the medieval period, fortified against attack" },
+      { num:4, dir:'A', word:'COMET', row:2, col:1, clue:"A celestial object consisting of a nucleus of ice and dust" },
+      { num:5, dir:'A', word:'JUPITER', row:3, col:2, clue:"The largest planet in our Solar System" },
+      { num:6, dir:'A', word:'EARTH', row:4, col:0, clue:"The third planet from the Sun, our home" },
+      { num:7, dir:'A', word:'GALAXY', row:5, col:3, clue:"A system of millions or billions of stars, together with gas and dust" },
+      { num:8, dir:'A', word:'TORNADO', row:6, col:1, clue:"A violently rotating column of air touching the ground" },
+      { num:9, dir:'A', word:'METEOR', row:7, col:2, clue:"A small body of matter from outer space that enters Earth's atmosphere" },
+      { num:2, dir:'D', word:'ELEPHANT', row:0, col:4, clue:"The largest existing land animal, known for its long trunk" }
+    ],
+    answer: [
+      [null,null,null,'D','E','S','E','R','T'],
+      ['C','A','S','T','L','E',null,null,null],
+      [null,'C','O','M','E','T',null,null,null],
+      [null,null,'J','U','P','I','T','E','R'],
+      ['E','A','R','T','H',null,null,null,null],
+      [null,null,null,'G','A','L','A','X','Y'],
+      [null,'T','O','R','N','A','D','O',null],
+      [null,null,'M','E','T','E','O','R',null]
+    ]
+  },
+  {
+    id: 3, title: 'Expert', rows: 9, cols: 12,
+    words: [
+      { num:1, dir:'A', word:'ASTEROID', row:0, col:4, clue:"A small rocky body orbiting the sun" },
+      { num:3, dir:'A', word:'DIAMOND', row:1, col:3, clue:"A precious stone consisting of a clear and colorless crystalline form of pure carbon" },
+      { num:4, dir:'A', word:'GRAVITY', row:2, col:0, clue:"The force that attracts a body toward the center of the earth" },
+      { num:5, dir:'A', word:'EQUATOR', row:3, col:5, clue:"An imaginary line drawn around the earth equally distant from both poles" },
+      { num:6, dir:'A', word:'GLACIER', row:4, col:4, clue:"A slowly moving mass or river of ice formed by the accumulation and compaction of snow" },
+      { num:7, dir:'A', word:'VOLCANO', row:5, col:3, clue:"A mountain or hill having a crater through which lava erupts" },
+      { num:8, dir:'A', word:'FOSSIL', row:6, col:1, clue:"The remains or impression of a prehistoric organism" },
+      { num:9, dir:'A', word:'CASTLE', row:7, col:2, clue:"A large medieval building or set of buildings, fortified against attack" },
+      { num:10, dir:'A', word:'JUPITER', row:8, col:0, clue:"The gas giant planet with the Great Red Spot" },
+      { num:2, dir:'D', word:'SATELLITE', row:0, col:5, clue:"An artificial body placed in orbit around the earth or moon" }
+    ],
+    answer: [
+      [null,null,null,null,'A','S','T','E','R','O','I','D'],
+      [null,null,null,'D','I','A','M','O','N','D',null,null],
+      ['G','R','A','V','I','T','Y',null,null,null,null,null],
+      [null,null,null,null,null,'E','Q','U','A','T','O','R'],
+      [null,null,null,null,'G','L','A','C','I','E','R',null],
+      [null,null,null,'V','O','L','C','A','N','O',null,null],
+      [null,'F','O','S','S','I','L',null,null,null,null,null],
+      [null,null,'C','A','S','T','L','E',null,null,null,null],
+      ['J','U','P','I','T','E','R',null,null,null,null,null]
+    ]
+  }
 ];
 
-/* Answer grid — null = black cell */
-const ANSWER = [
-//  0    1    2    3    4    5    6    7    8    9   10
-  ['A', 'F', 'R', 'I', 'C', 'A', null,null,null,null,null], // row 0  AFRICA
-  [null,null,null,null,'A', 'M', 'A', 'Z', 'O', 'N', null], // row 1  AMAZON
-  [null,null,null,null,'L', 'A', 'V', 'A', null,null,null], // row 2  LAVA
-  [null,null,null,null,'I', 'S', 'L', 'A', 'N', 'D', null], // row 3  ISLAND
-  [null,null,null,null,'F', 'O', 'S', 'S', 'I', 'L', null], // row 4  FOSSIL
-  [null,null,null,null,'O', 'C', 'E', 'A', 'N', null,null], // row 5  OCEAN
-  [null,null,null,null,'R', 'O', 'C', 'K', 'E', 'T', null], // row 6  ROCKET
-  [null,null,null,null,'N', 'E', 'P', 'T', 'U', 'N', 'E'], // row 7  NEPTUNE
-  [null,null,null,null,'I', 'C', 'E', 'B', 'E', 'R', 'G'], // row 8  ICEBERG
-  [null,null,null,null,'A', 'U', 'R', 'O', 'R', 'A', null], // row 9  AURORA
-];
-
-const ROWS = 10, COLS = 11;
+let currentLevelIndex = 0;
+// These are loaded dynamically during initGame:
+let WORDS = [];
+let ANSWER = [];
+let ROWS = 0, COLS = 0;
 
 /* ── State ──────────────────────────── */
 let filled       = {};        // 'r,c' → letter
@@ -551,11 +618,7 @@ let timerSec     = 0;
 let timerInt     = null;
 
 /* ── Cell number lookup ─────────────── */
-const cellNum = {};
-WORDS.forEach(w => {
-  const k = `${w.row},${w.col}`;
-  if (!cellNum[k]) cellNum[k] = w.num;
-});
+let cellNum = {};
 
 /* ── Helpers ────────────────────────── */
 function getWordCells(w) {
@@ -954,11 +1017,68 @@ function showWin() {
   const m = Math.floor(timerSec / 60), s = timerSec % 60;
   document.getElementById('win-msg').textContent =
     `Solved in ${m}:${s.toString().padStart(2,'0')} · Score: ${score} pts 🎉`;
+    
+  const actionBtn = document.getElementById('win-action-btn');
+  if (currentLevelIndex < LEVELS.length - 1) {
+    actionBtn.textContent = 'Next Level';
+    actionBtn.onclick = nextLevel;
+  } else {
+    actionBtn.textContent = 'Play Again';
+    actionBtn.onclick = () => { currentLevelIndex = 0; initGame(); };
+  }
   document.getElementById('win-modal').classList.add('open');
+}
+
+/* ── Level Selector ─────────────────── */
+function nextLevel() {
+  if (currentLevelIndex < LEVELS.length - 1) {
+    currentLevelIndex++;
+    initGame();
+  }
+}
+
+function openLevelModal() {
+  const list = document.getElementById('level-list');
+  list.innerHTML = '';
+  LEVELS.forEach((lvl, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'win-btn';
+    btn.style.width = '100%';
+    if (i === currentLevelIndex) {
+      btn.style.background = 'rgba(255,255,255,0.2)';
+    } else {
+      btn.style.background = 'rgba(255,255,255,0.05)';
+    }
+    btn.textContent = `Level ${lvl.id} - ${lvl.title}`;
+    btn.onclick = () => {
+      currentLevelIndex = i;
+      closeLevelModal();
+      initGame();
+    };
+    list.appendChild(btn);
+  });
+  document.getElementById('level-modal').classList.add('open');
+}
+
+function closeLevelModal() {
+  document.getElementById('level-modal').classList.remove('open');
 }
 
 /* ── Init ───────────────────────────── */
 function initGame() {
+  const levelData = LEVELS[currentLevelIndex];
+  WORDS = levelData.words;
+  ANSWER = levelData.answer;
+  ROWS = levelData.rows;
+  COLS = levelData.cols;
+  document.getElementById('current-level-display').textContent = 'Level ' + levelData.id;
+
+  cellNum = {};
+  WORDS.forEach(w => {
+    const k = `${w.row},${w.col}`;
+    if (!cellNum[k]) cellNum[k] = w.num;
+  });
+
   filled = {}; lockedCells = new Set(); solvedWords = new Set();
   activeWord = null; bankSlots = []; wordEmptyCells = []; wordCursor = 0; cellToSlot = {};
   score = 0; timerSec = 0;
