@@ -432,7 +432,12 @@
     };
     let currentChar = 'naruto';
 
-    const TILE_SIZES = { 3: 130, 4: 110, 5: 88 };
+    function getTileSize() {
+      if (window.innerWidth <= 640) {
+        return { 3: 90, 4: 70, 5: 56 }[gridSize];
+      }
+      return { 3: 130, 4: 110, 5: 88 }[gridSize];
+    }
 
     /* ─── DOM refs ──────────────────────────────────── */
     const board       = document.getElementById('puzzle-board');
@@ -456,6 +461,14 @@
           gridSize = parseInt(btn.dataset.grid);
           startNewGame();
         });
+      });
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (tiles.length > 0) renderBoard();
+        }, 200);
       });
 
       // Character buttons
@@ -495,7 +508,7 @@
     }
 
     function renderBoard() {
-      const tileSize = TILE_SIZES[gridSize] || 110;
+      const tileSize = getTileSize();
       const boardSize = tileSize * gridSize + 3 * (gridSize - 1) + 6;
 
       board.style.gridTemplateColumns = `repeat(${gridSize}, ${tileSize}px)`;
