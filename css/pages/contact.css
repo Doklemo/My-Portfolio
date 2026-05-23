@@ -1,6 +1,10 @@
 /* Contact Page Styles */
 
 /* Hero Layout */
+.contact-hero {
+  padding-top: var(--space-48) !important;
+}
+
 .contact-hero-inner {
   display: grid;
   grid-template-columns: 1fr;
