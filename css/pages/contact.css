@@ -175,6 +175,10 @@
 }
 
 /* Success State UI */
+[hidden] {
+  display: none !important;
+}
+
 .contact-success {
   display: flex;
   flex-direction: column;
