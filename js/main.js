@@ -58,9 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
      3. CONTACT FORM VALIDATION & SUBMISSION
      ------------------------------------------------------- */
   const form = document.getElementById('contact-form');
-  const success = document.getElementById('form-success');
+  const success = document.getElementById('contact-success');
 
-  if (form && success) {
+  if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -70,24 +70,35 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const data = new FormData(form);
-      const submitBtn = form.querySelector('[type="submit"]');
+      const formData = new FormData(form);
+      formData.append("access_key", "9bf20111-7a7e-475c-b8fa-126dadeb7d3f");
 
-      // Disable button during submission
+      const submitBtn = form.querySelector('[type="submit"]');
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
       }
 
       try {
-        await fetch('/', {
-          method: 'POST',
-          body: new URLSearchParams(data).toString(),
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
         });
-        form.hidden = true;
-        success.hidden = false;
-      } catch {
+        const result = await response.json();
+
+        if (result.success) {
+          if (success) {
+            form.hidden = true;
+            success.hidden = false;
+          }
+        } else {
+          alert('Something went wrong. Please email me directly.');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send message';
+          }
+        }
+      } catch (error) {
         alert('Something went wrong. Please email me directly.');
         if (submitBtn) {
           submitBtn.disabled = false;
