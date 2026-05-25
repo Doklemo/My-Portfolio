@@ -117,6 +117,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+
+    // Handle Back-Forward Cache (bfcache) so the form correctly resets if the user leaves and returns
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        success.hidden = true;
+        form.hidden = false;
+        form.reset();
+        const submitBtn = form.querySelector('[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send message';
+        }
+      }
+    });
   }
 
   /* -------------------------------------------------------
