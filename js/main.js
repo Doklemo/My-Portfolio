@@ -90,6 +90,17 @@ document.addEventListener('DOMContentLoaded', () => {
           if (success) {
             form.hidden = true;
             success.hidden = false;
+            
+            // Hide success message and reset form after 5 seconds
+            setTimeout(() => {
+              success.hidden = true;
+              form.hidden = false;
+              form.reset();
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send message';
+              }
+            }, 5000);
           }
         } else {
           alert('Something went wrong. Please email me directly.');
